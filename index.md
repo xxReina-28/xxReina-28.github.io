@@ -40,15 +40,6 @@ engagement, and historical trends.
 
 ---
 
-### DIA · Data Insights Accelerator
-Analytics project focused on SQL-driven insights and executive reporting.
-Built to answer real business questions using structured data modeling
-and Power BI dashboards.
-
-[View Project →](#)
-
----
-
 ### Pipeline Strategist Agent
 AI-assisted pipeline intelligence system for sales and operations teams.
 
@@ -59,17 +50,19 @@ and outbound playbook generation with a systems-first approach.
 
 ---
 
-## How I Think
+### DIA · Data Insights Accelerator (in progress)
+Analytics project focused on SQL-driven insights and executive reporting.
+Built to answer real business questions using structured data modeling
+and Power BI dashboards.
 
-I prioritize clarity over complexity.
-I design systems that can be understood, maintained, and trusted.
-If I cannot win the situation, I redesign the system that defines it.
+[View Project →](#)
+
 
 ---
 
 ## Contact
 
 - GitHub. https://github.com/xxReina-28  
-- LinkedIn. add your link here  
-- Email. add your email here  
+- LinkedIn. https://www.linkedin.com/in/ninasuico/  
+- Email. ninasuicox@gmail.com
 
