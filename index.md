@@ -2,8 +2,6 @@
 layout: default
 ---
 
-### Niña Peterine Sheen Suico
-
 I design systems that make work calmer, clearer, and more effective.
 
 My focus is on structured workflows, automation that reduces manual effort,
@@ -59,5 +57,5 @@ If I cannot win the situation, I redesign the system that defines it.
 ## Contact
 
 - GitHub: https://github.com/xxReina-28  
-- LinkedIn: add your link here  
-- Email: add your email here
+- LinkedIn: https://www.linkedin.com/in/ninasuico/ 
+- Email: ninasuicox@gmail.com
