@@ -1,6 +1,8 @@
 ---
-layout: home
+layout: page
+title: ""
 ---
+
 
 ## Hi, I’m Niña Peterine Sheen Suico (Reina)
   
