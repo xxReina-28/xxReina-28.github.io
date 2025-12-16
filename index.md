@@ -2,7 +2,7 @@
 layout: default
 ---
 
-### Strategic Architect
+### Niña Peterine Sheen Suico
 
 I design systems that make work calmer, clearer, and more effective.
 
