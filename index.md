@@ -34,15 +34,15 @@ layout: default
   <div class="grid grid-2">
     <div class="card">
       <h3>Availability</h3>
-      <p class="muted">
-        Open to full-time roles. Remote-first or relocation.
-      </p>
-      <div class="badges">
-        <span class="badge">Remote</span>
-        <span class="badge">Relocation</span>
-        <span class="badge">Worldwide</span>
-      </div>
-    </div>
+<p class="muted">
+  Manila, Philippines based (currently traveling).
+  Open to worldwide opportunities. Willing to relocate and open to remote work.
+</p>
+<div class="badges">
+  <span class="badge">Worldwide</span>
+  <span class="badge">Open to Relocation</span>
+  <span class="badge">Remote</span>
+</div>
 
     <div class="card">
       <h3>Focus Areas</h3>
