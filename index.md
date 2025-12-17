@@ -6,7 +6,7 @@ title: Reina | Business Systems & Operations Automation
 <section class="section">
 
 <div class="profile card">
-  <img src="assets/images/profile.jpg" alt="Reina profile photo" class="avatar" />
+  <img src="assets/images/profile.jpg" alt="assets/images/profile.jpg" class="avatar" />
 
   <div>
     <h1>Reina</h1>
