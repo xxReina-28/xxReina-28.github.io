@@ -72,7 +72,7 @@ layout: default
     </div>
     <div class="card">
       <h4>In Progress</h4>
-      <p class="muted">Google Data Analytics. PL-300 Power BI. Salesforce Admin.</p>
+      <p class="muted">Google Data Analytics. PL-300 Power BI.</p>
     </div>
   </div>
 </div>
