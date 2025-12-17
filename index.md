@@ -78,24 +78,6 @@ layout: default
 </div>
 
 <div class="section">
-  <h2 class="section-title">Skills</h2>
-  <div class="grid grid-3">
-    <div class="card">
-      <h4>Automation</h4>
-      <p class="muted">Power Automate. Workflow design. Notifications. Scheduling. Governance.</p>
-    </div>
-    <div class="card">
-      <h4>Data and Analytics</h4>
-      <p class="muted">Power BI. DAX basics. Data modeling. KPI design. Reporting.</p>
-    </div>
-    <div class="card">
-      <h4>Systems and Ops</h4>
-      <p class="muted">Process mapping. SOPs. CRM workflows. Stakeholder coordination.</p>
-    </div>
-  </div>
-</div>
-
-<div class="section">
   <h2 class="section-title">Featured Projects</h2>
 
   <div class="grid grid-3">
@@ -129,20 +111,6 @@ layout: default
         <span class="badge">Agents</span>
         <span class="badge">Ops Systems</span>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <h2 class="section-title">Interests</h2>
-  <div class="grid grid-2">
-    <div class="card">
-      <h3>Systems and Strategy</h3>
-      <p class="muted">Process design. Automation architecture. Decision-support analytics.</p>
-    </div>
-    <div class="card">
-      <h3>Culture and Nature</h3>
-      <p class="muted">Travel. temples. cultural exploration. nature.</p>
     </div>
   </div>
 </div>
