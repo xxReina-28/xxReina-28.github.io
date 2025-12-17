@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Reina | Business Systems & Operations Automation
+title: Nina Suico | Business Systems & Operations Automation
 ---
 
 <section class="section">
