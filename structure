@@ -1,0 +1,10 @@
+/
+├─ _config.yml
+├─ index.md
+├─ assets/
+│  ├─ css/
+│  │  └─ style.scss
+│  └─ img/
+│     └─ profile.jpg
+└─ _includes/
+   └─ head-custom.html
