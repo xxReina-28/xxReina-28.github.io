@@ -117,7 +117,7 @@ title: Nina Suico | Business Systems & Operations Automation
     </div>
 
     <div class="btn-row">
-      <a class="btn" href="#" target="_blank">
+      <a class="btn" href="https://github.com/xxReina-28/Pipeline-strategist-agent-v2" target="_blank">
         View Repo
       </a>
     </div>
