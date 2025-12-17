@@ -7,7 +7,7 @@ layout: default
     <div class="profile">
       <img class="avatar" src="./assets/img/profile.jpg" alt="Niña (Reina) profile photo">
       <div>
-        <h2 style="margin:0;">Niña (Reina)</h2>
+        <h2 style="margin:0;">Niña Peterine Sheen Suico (Reina)</h2>
         <p class="muted" style="margin:0.3rem 0 0 0;">
           Business Systems.Operations Automation. Analytics.
         </p>
@@ -21,7 +21,7 @@ layout: default
 
         <div class="btn-row">
           <a class="btn" href="PASTE_YOUR_RESUME_LINK_HERE" target="_blank" rel="noopener">Resume</a>
-          <a class="btn btn-ghost" href="PASTE_YOUR_LINKEDIN_LINK_HERE" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
@@ -112,21 +112,6 @@ layout: default
         <span class="badge">Power Automate</span>
         <span class="badge">SharePoint</span>
         <span class="badge">Power BI</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>DIA. Data Insights Accelerator</h3>
-      <p class="muted">
-        SQL-driven analytics case study. Business questions, insights, and executive-ready reporting.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn-ghost" href="PASTE_DIA_REPO_LINK_HERE" target="_blank" rel="noopener">View Repo</a>
-      </div>
-      <div class="badges">
-        <span class="badge">SQL</span>
-        <span class="badge">Power BI</span>
-        <span class="badge">Analytics</span>
       </div>
     </div>
 
