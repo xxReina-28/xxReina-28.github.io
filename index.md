@@ -19,7 +19,7 @@ title: Reina | Business Systems & Operations Automation
 
     <div class="btn-row">
       <a class="btn" href="assets/Reina_Resume.pdf" target="_blank">Resume</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank">GitHub</a>
     </div>
   </div>
@@ -64,7 +64,9 @@ title: Reina | Business Systems & Operations Automation
     <p><strong>Certifications</strong></p>
     <ul>
       <li>Certified ScrumMaster (CSM)</li>
-      <li>Lean Six Sigma Yellow Belt</li>
+      <li>Certified Lean Six Sigma Yellow Belt</li>
+      <li>Certified Salesforce Admin</li>
+      <li>Certified Hubspot Admin</li>
     </ul>
 
     <p><strong>Interests</strong></p>
