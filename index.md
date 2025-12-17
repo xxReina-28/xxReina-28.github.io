@@ -7,16 +7,16 @@ layout: default
     <div class="profile">
       <img class="avatar" src="./assets/img/profile.jpg" alt="Niña (Reina) profile photo">
       <div>
-        <h2 style="margin:0;">Niña Peterine Sheen Suico (Reina)</h2>
-        <p class="muted" style="margin:0.3rem 0 0 0;">
+        <h2 style="margin:0;">Niña Peterine Sheen Suico</h2>
+        <p class="muted" style="margin:0.35rem 0 0 0;">
           Business Systems.Operations Automation. Analytics.
         </p>
-        <p style="margin:0.6rem 0 0 0;">
+        <p style="margin:0.7rem 0 0 0;">
           I redesign workflows into calm, scalable systems. I automate recurring work, standardize operations,
           and build analytics that support decisions, not noise.
         </p>
-        <p class="muted" style="margin:0.6rem 0 0 0;">
-          Open to opportunities worldwide. Relocation and remote.
+        <p class="muted" style="margin:0.7rem 0 0 0;">
+          Manila, Philippines based (currently traveling). Open to worldwide opportunities. Willing to relocate and open to remote work.
         </p>
 
         <div class="btn-row">
@@ -30,35 +30,39 @@ layout: default
 </div>
 
 <div class="section">
-  <h2 class="section-title">Details</h2>
   <div class="grid grid-2">
     <div class="card">
-      <h3>Availability</h3>
-<p class="muted">
-  Manila, Philippines based (currently traveling).
-  Open to worldwide opportunities. Willing to relocate and open to remote work.
-</p>
-<div class="badges">
-  <span class="badge">Worldwide</span>
-  <span class="badge">Open to Relocation</span>
-  <span class="badge">Remote</span>
-</div>
-</div>
+      <h2 style="margin-top:0;">About Me</h2>
+      <p class="muted">
+        I build systems that make work easier. Clear workflows, structured processes, and tools that support people instead of complicating their jobs.
+      </p>
+      <p class="muted">
+        My work sits between operations and technology. I translate messy real-world workflows into automation, documentation, and dashboards that leadership can trust.
+      </p>
+      <p class="muted" style="margin-bottom:0;">
+        I prioritize clarity over complexity. If I cannot win the situation, I redesign the system that defines it.
+      </p>
+    </div>
 
-<div class="section">
-  <h2 class="section-title">Certifications</h2>
-  <div class="grid grid-3">
     <div class="card">
-      <h4>Certified ScrumMaster (CSM)</h4>
-      <p class="muted">Credentialed. Process and delivery fundamentals.</p>
-    </div>
-    <div class="card">
-      <h4>Lean Six Sigma Yellow Belt</h4>
-      <p class="muted">Process improvement. Waste reduction. Standardization.</p>
-    </div>
-    <div class="card">
-      <h4>In Progress</h4>
-      <p class="muted">Google Data Analytics. PL-300 Power BI.</p>
+      <h2 style="margin-top:0;">Details</h2>
+
+      <p class="muted" style="margin-bottom:0.4rem;"><strong>Location</strong><br>Manila, Philippines (currently traveling)</p>
+      <p class="muted" style="margin-bottom:0.4rem;"><strong>Availability</strong><br>Worldwide opportunities. Open to relocation and remote work.</p>
+
+      <p class="muted" style="margin:0.9rem 0 0.4rem 0;"><strong>Certifications</strong></p>
+      <ul class="muted" style="margin-top:0.2rem;">
+        <li>Certified ScrumMaster (CSM)</li>
+        <li>Certified Lean Six Sigma Yellow Belt</li>
+      </ul>
+
+      <p class="muted" style="margin:0.9rem 0 0.4rem 0;"><strong>Interests</strong></p>
+      <div class="badges">
+        <span class="badge">Automation</span>
+        <span class="badge">Ops Systems</span>
+        <span class="badge">Analytics</span>
+        <span class="badge">Culture and Travel</span>
+      </div>
     </div>
   </div>
 </div>
@@ -66,8 +70,8 @@ layout: default
 <div class="section">
   <h2 class="section-title">Featured Projects</h2>
 
-  <div class="grid grid-3">
-    <div class="card">
+  <div class="grid project-grid">
+    <div class="card project-card">
       <h3>Employee of the Month Automation</h3>
       <p class="muted">
         End-to-end nomination, reminders, scoring flow, and Power BI analytics.
@@ -83,11 +87,10 @@ layout: default
       </div>
     </div>
 
-    <div class="card">
+    <div class="card project-card">
       <h3>Pipeline Strategist Agent</h3>
       <p class="muted">
-        Automated lead ingestion, cleaning, segmentation, scoring,
-        and outbound playbook generation for GTM workflows.
+        Automated lead ingestion, cleaning, segmentation, scoring, and outbound playbook generation for GTM workflows.
       </p>
       <div class="btn-row">
         <a class="btn" href="https://github.com/xxReina-28/Pipeline-strategist-agent-v2" target="_blank" rel="noopener">View Repo</a>
@@ -98,5 +101,5 @@ layout: default
         <span class="badge">Ops Systems</span>
       </div>
     </div>
-  </div>
-</div>
+
+
