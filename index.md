@@ -9,7 +9,7 @@ layout: default
       <div>
         <h2 style="margin:0;">Niña (Reina)</h2>
         <p class="muted" style="margin:0.3rem 0 0 0;">
-          Strategic Architect. Business Systems. Automation. Analytics.
+          Business Systems.Operations Automation. Analytics.
         </p>
         <p style="margin:0.6rem 0 0 0;">
           I redesign workflows into calm, scalable systems. I automate recurring work, standardize operations,
@@ -51,7 +51,7 @@ layout: default
       </p>
       <div class="badges">
         <span class="badge">Business Systems</span>
-        <span class="badge">Automation</span>
+        <span class="badge">Operations Automation</span>
         <span class="badge">Analytics</span>
         <span class="badge">Ops</span>
       </div>
