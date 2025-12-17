@@ -43,6 +43,7 @@ layout: default
   <span class="badge">Open to Relocation</span>
   <span class="badge">Remote</span>
 </div>
+</div>
 
 <div class="section">
   <h2 class="section-title">Certifications</h2>
