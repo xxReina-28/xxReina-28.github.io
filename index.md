@@ -44,21 +44,6 @@ layout: default
   <span class="badge">Remote</span>
 </div>
 
-    <div class="card">
-      <h3>Focus Areas</h3>
-      <p class="muted">
-        Operations systems. Workflow automation. CRM process. Reporting and analytics.
-      </p>
-      <div class="badges">
-        <span class="badge">Business Systems</span>
-        <span class="badge">Operations Automation</span>
-        <span class="badge">Analytics</span>
-        <span class="badge">Ops</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="section">
   <h2 class="section-title">Certifications</h2>
   <div class="grid grid-3">
