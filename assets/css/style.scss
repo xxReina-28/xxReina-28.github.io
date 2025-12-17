@@ -1,0 +1,140 @@
+---
+---
+
+/* Dark theme base */
+body {
+  background: #0b0f14;
+  color: #e6edf3;
+}
+
+.main-content {
+  max-width: 1100px;
+}
+
+a {
+  color: #2bd576;
+}
+
+a:hover {
+  color: #7dffb1;
+}
+
+/* Cayman header tuning */
+.page-header {
+  background: linear-gradient(135deg, #0f1f17, #0b0f14);
+  color: #e6edf3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-name, .project-tagline {
+  color: #e6edf3;
+}
+
+/* Sections */
+.section {
+  margin: 2.2rem 0;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.2px;
+}
+
+/* Layout helpers */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.1rem 1.1rem;
+}
+
+.card h3, .card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.muted {
+  color: rgba(230, 237, 243, 0.78);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(43, 213, 118, 0.35);
+  background: rgba(43, 213, 118, 0.08);
+}
+
+/* Buttons */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 0.95rem;
+  border-radius: 10px;
+  border: 1px solid rgba(43, 213, 118, 0.45);
+  background: rgba(43, 213, 118, 0.10);
+  color: #e6edf3;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: rgba(43, 213, 118, 0.18);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Profile */
+.profile {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .profile { grid-template-columns: 1fr; }
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
