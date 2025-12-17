@@ -196,3 +196,40 @@ h1, h2, h3, h4 {
 .project-card {
   min-height: 200px;
 }
+
+/* =========================================================
+   CAYMAN OVERRIDE FIXES (prevents "broken" look)
+   ========================================================= */
+
+.main-content {
+  background: transparent !important;
+}
+
+/* Ensure text stays consistent on dark background */
+.main-content,
+.main-content p,
+.main-content li,
+.main-content ul {
+  color: #e6edf3;
+}
+
+/* Clean list spacing inside cards (Capabilities card) */
+.card ul {
+  margin: 0.4rem 0 1rem 1.1rem;
+  padding: 0;
+}
+
+.card li {
+  margin: 0.25rem 0;
+}
+
+/* Reduce overly large default heading margins */
+.card h2, .card h3 {
+  margin-top: 0;
+}
+
+/* Buttons: ensure they don’t inherit weird theme styles */
+.btn {
+  color: #e6edf3 !important;
+  text-decoration: none !important;
+}
