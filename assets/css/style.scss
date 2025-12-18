@@ -9,6 +9,9 @@
 .skip-to-content { display: none !important; }
 .page-header { display: none !important; }
 
+/* Ensure Cayman doesn't force white content background */
+.main-content { background: transparent !important; }
+
 /* =========================================================
    BASE THEME
    ========================================================= */
@@ -20,6 +23,7 @@ body {
                Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Center the layout */
 .main-content {
   max-width: 1320px;
   padding: 2rem 1.2rem;
@@ -45,6 +49,7 @@ a:hover {
 h1, h2, h3, h4 {
   color: #e6edf3;
   letter-spacing: 0.2px;
+  margin-top: 0;
 }
 
 .section-title {
@@ -55,6 +60,13 @@ h1, h2, h3, h4 {
 /* Muted text */
 .muted {
   color: rgba(230, 237, 243, 0.78);
+}
+
+/* Make default text consistent inside Cayman */
+.main-content,
+.main-content p,
+.main-content li {
+  color: #e6edf3;
 }
 
 /* =========================================================
@@ -70,15 +82,11 @@ h1, h2, h3, h4 {
   gap: 1rem;
 }
 
-/* About + Details layout */
+/* Auto-fit: fixes uneven spacing automatically */
 .grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: stretch;
 }
-
-@media (max-width: 1100px) {
-  .grid-3 { grid-template-columns: 1fr; }
-}
-
 
 /* =========================================================
    CARDS
@@ -91,11 +99,22 @@ h1, h2, h3, h4 {
   padding: 1.35rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   transition: transform 120ms ease, border-color 120ms ease;
+  height: 100%;
 }
 
 .card:hover {
   border-color: rgba(43, 213, 118, 0.25);
   transform: translateY(-2px);
+}
+
+/* Clean list spacing inside cards */
+.card ul {
+  margin: 0.45rem 0 1rem 1.1rem;
+  padding: 0;
+}
+
+.card li {
+  margin: 0.25rem 0;
 }
 
 /* =========================================================
@@ -161,7 +180,8 @@ h1, h2, h3, h4 {
   border-radius: 10px;
   border: 1px solid rgba(43, 213, 118, 0.45);
   background: rgba(43, 213, 118, 0.10);
-  color: #e6edf3;
+  color: #e6edf3 !important;
+  text-decoration: none !important;
 }
 
 .btn:hover {
@@ -180,19 +200,8 @@ h1, h2, h3, h4 {
 .project-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 1100px) {
-  .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 700px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: stretch;
 }
 
 .project-card {
@@ -200,38 +209,65 @@ h1, h2, h3, h4 {
 }
 
 /* =========================================================
-   CAYMAN OVERRIDE FIXES (prevents "broken" look)
+   EXPANDABLE CAPABILITIES
    ========================================================= */
 
-.main-content {
-  background: transparent !important;
+details.cap-details {
+  margin-top: 0.25rem;
 }
 
-/* Ensure text stays consistent on dark background */
-.main-content,
-.main-content p,
-.main-content li,
-.main-content ul {
-  color: #e6edf3;
+details.cap-details summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
 }
 
-/* Clean list spacing inside cards (Capabilities card) */
-.card ul {
-  margin: 0.4rem 0 1rem 1.1rem;
-  padding: 0;
+details.cap-details summary::-webkit-details-marker {
+  display: none;
 }
 
-.card li {
+.cap-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.cap-chevron {
+  opacity: 0.8;
+  transform: rotate(0deg);
+  transition: transform 160ms ease, opacity 160ms ease;
+  font-size: 0.95rem;
+}
+
+details[open] .cap-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.cap-mini {
+  margin: 0.6rem 0 0 1.1rem;
+}
+
+.cap-mini li {
   margin: 0.25rem 0;
 }
 
-/* Reduce overly large default heading margins */
-.card h2, .card h3 {
-  margin-top: 0;
+.cap-full {
+  margin-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 0.9rem;
 }
 
-/* Buttons: ensure they don’t inherit weird theme styles */
-.btn {
-  color: #e6edf3 !important;
-  text-decoration: none !important;
+.cap-full p {
+  margin: 0.85rem 0 0.35rem;
+}
+
+.cap-full ul {
+  margin: 0.35rem 0 0.9rem 1.1rem;
+}
+
+.cap-full li {
+  margin: 0.25rem 0;
 }
