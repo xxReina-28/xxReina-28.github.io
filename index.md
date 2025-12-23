@@ -63,7 +63,9 @@ title: Reina | Business Systems & Operations Automation
       <p><strong>Certifications</strong></p>
       <ul>
         <li>Certified ScrumMaster (CSM)</li>
-        <li>Lean Six Sigma Yellow Belt</li>
+        <li>Certified Lean Six Sigma Yellow Belt</li>
+        <li>Certified Salesforce Admin</li>
+        <li>Certified Hubspot Admin (Sales, Marketing, Reporting)</li>
       </ul>
 
       <p><strong>Interests</strong></p>
