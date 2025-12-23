@@ -2,23 +2,43 @@
 ---
 
 /* =========================================================
-   GLOBAL RESET / OVERRIDES
+   GLOBAL RESET / OVERRIDES (Cayman)
    ========================================================= */
 
-/* Hide Cayman default header and skip link */
 .skip-to-content { display: none !important; }
 .page-header { display: none !important; }
-
-/* Ensure Cayman doesn't force white content background */
 .main-content { background: transparent !important; }
 
 /* =========================================================
    BASE THEME
    ========================================================= */
 
+:root{
+  --bg: #0b0f14;
+  --text: #e6edf3;
+  --muted: rgba(230, 237, 243, 0.78);
+
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: rgba(43, 213, 118, 0.25);
+
+  --accent: #2bd576;
+  --accent-hover: #7dffb1;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.40);
+
+  --radius: 18px;
+}
+
+/* Avoid surprise width calculations */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
 body {
-  background: #0b0f14;
-  color: #e6edf3;
+  background: var(--bg);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                Roboto, Helvetica, Arial, sans-serif;
 }
@@ -31,14 +51,18 @@ body {
   margin-right: auto;
 }
 
+/* Cayman defaults sometimes override text. enforce consistency */
+.main-content,
+.main-content p,
+.main-content li { color: var(--text); }
+
 /* Links */
 a {
-  color: #2bd576;
+  color: var(--accent);
   text-decoration: none;
 }
-
 a:hover {
-  color: #7dffb1;
+  color: var(--accent-hover);
   text-decoration: none;
 }
 
@@ -47,75 +71,78 @@ a:hover {
    ========================================================= */
 
 h1, h2, h3, h4 {
-  color: #e6edf3;
+  color: var(--text);
   letter-spacing: 0.2px;
-  margin-top: 0;
+  margin: 0;
 }
+
+h1 { font-size: clamp(1.9rem, 1.6rem + 1vw, 2.3rem); }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.1rem; }
 
 .section-title {
   font-size: 1.45rem;
   margin: 0 0 1.2rem 0;
 }
 
-/* Muted text */
-.muted {
-  color: rgba(230, 237, 243, 0.78);
-}
+.muted { color: var(--muted); }
 
-/* Make default text consistent inside Cayman */
-.main-content,
-.main-content p,
-.main-content li {
-  color: #e6edf3;
-}
+p { margin: 0.65rem 0; }
+ul { margin: 0.45rem 0 1rem 1.1rem; padding: 0; }
+li { margin: 0.25rem 0; }
 
 /* =========================================================
-   LAYOUT HELPERS
+   SECTIONS + GRIDS
    ========================================================= */
 
-.section {
-  margin: 1.6rem 0;
-}
+.section { margin: 1.6rem 0; }
 
+/* Generic grid helper */
 .grid {
   display: grid;
   gap: 1rem;
 }
 
-/* Auto-fit: fixes uneven spacing automatically */
+/* 3-column auto-fit */
 .grid-3 {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  align-items: stretch;
+  align-items: start; /* key. prevents stretch height weirdness */
+}
+
+/* Featured Projects grid */
+.project-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start; /* key. prevents overlap from height stretch */
+  grid-auto-rows: auto;
 }
 
 /* =========================================================
    CARDS
    ========================================================= */
 
+/* IMPORTANT: remove height:100% to prevent overlap/stretch issues */
 .card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
   padding: 1.35rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  transition: transform 120ms ease, border-color 120ms ease;
-  height: 100%;
+  box-shadow: var(--shadow);
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+  height: auto;
+  min-height: 0;
+  overflow: hidden; /* prevents bleed artifacts */
 }
 
 .card:hover {
-  border-color: rgba(43, 213, 118, 0.25);
+  border-color: var(--card-border-hover);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Clean list spacing inside cards */
-.card ul {
-  margin: 0.45rem 0 1rem 1.1rem;
-  padding: 0;
-}
-
-.card li {
-  margin: 0.25rem 0;
-}
+/* Ensure internal lists don’t add surprise spacing */
+.card ul { margin-top: 0.45rem; }
 
 /* =========================================================
    PROFILE / HERO
@@ -128,19 +155,22 @@ h1, h2, h3, h4 {
   align-items: center;
 }
 
-@media (max-width: 600px) {
-  .profile {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-
 .avatar {
   width: 120px;
   height: 120px;
   border-radius: 16px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 600px) {
+  .profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .btn-row { justify-content: center; }
 }
 
 /* =========================================================
@@ -160,7 +190,7 @@ h1, h2, h3, h4 {
   border-radius: 999px;
   border: 1px solid rgba(43, 213, 118, 0.35);
   background: rgba(43, 213, 118, 0.08);
-  color: #e6edf3;
+  color: var(--text);
 }
 
 /* =========================================================
@@ -178,129 +208,4 @@ h1, h2, h3, h4 {
   display: inline-block;
   padding: 0.65rem 1rem;
   border-radius: 10px;
-  border: 1px solid rgba(43, 213, 118, 0.45);
-  background: rgba(43, 213, 118, 0.10);
-  color: #e6edf3 !important;
-  text-decoration: none !important;
-}
-
-.btn:hover {
-  background: rgba(43, 213, 118, 0.18);
-}
-
-.btn-ghost {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* =========================================================
-   FEATURED PROJECTS
-   ========================================================= */
-
-.project-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  align-items: stretch;
-}
-
-.project-card {
-  min-height: 200px;
-}
-
-/* =========================================================
-   EXPANDABLE CAPABILITIES
-   ========================================================= */
-
-details.cap-details {
-  margin-top: 0.25rem;
-}
-
-details.cap-details summary {
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-
-details.cap-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.cap-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
-}
-
-.cap-chevron {
-  opacity: 0.8;
-  transform: rotate(0deg);
-  transition: transform 160ms ease, opacity 160ms ease;
-  font-size: 0.95rem;
-}
-
-details[open] .cap-chevron {
-  transform: rotate(180deg);
-  opacity: 1;
-}
-
-.cap-mini {
-  margin: 0.6rem 0 0 1.1rem;
-}
-
-.cap-mini li {
-  margin: 0.25rem 0;
-}
-
-.cap-full {
-  margin-top: 0.8rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 0.9rem;
-}
-
-.cap-full p {
-  margin: 0.85rem 0 0.35rem;
-}
-
-.cap-full ul {
-  margin: 0.35rem 0 0.9rem 1.1rem;
-}
-
-.cap-full li {
-  margin: 0.25rem 0;
-}
-
-/* =========================================
-   CREDENTIALS SECTION – SECONDARY VISUAL WEIGHT
-   ========================================= */
-
-.section .project-grid .card.project-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Slightly de-emphasize credentials cards */
-.section:last-of-type .project-grid .project-card {
-  padding: 1.25rem;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-/* Titles smaller than project titles */
-.section:last-of-type .project-grid .project-card h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.25rem;
-}
-
-/* Badges slightly muted */
-.section:last-of-type .project-grid .badge {
-  font-size: 0.7rem;
-  opacity: 0.85;
-}
-
-/* Gentle hover, not aggressive */
-.section:last-of-type .project-grid .project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
+  border: 1px solid rgba(43, 213, 1
