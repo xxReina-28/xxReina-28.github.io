@@ -17,9 +17,9 @@ title: Nina Suico | Business Systems & Operations Automation
       </p>
 
       <div class="btn-row">
-        <a class="btn" href="assets/Reina_Resume.pdf" target="_blank">Resume</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank">GitHub</a>
+        <a class="btn" href="assets/docs/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </div>
@@ -163,7 +163,7 @@ title: Nina Suico | Business Systems & Operations Automation
       </div>
 
       <div class="btn-row">
-        <a class="btn" href="https://github.com/xxReina-28/Employee-of-the-Month-Automation" target="_blank">View Repo</a>
+        <a class="btn" href="https://github.com/xxReina-28/Employee-of-the-Month-Automation" target="_blank" rel="noopener">View Repo</a>
       </div>
     </div>
 
@@ -184,7 +184,7 @@ title: Nina Suico | Business Systems & Operations Automation
       </div>
 
       <div class="btn-row">
-        <a class="btn" href="https://github.com/xxReina-28/Pipeline-strategist-agent-v2" target="_blank">View Repo</a>
+        <a class="btn" href="https://github.com/xxReina-28/Pipeline-strategist-agent-v2" target="_blank" rel="noopener">View Repo</a>
       </div>
     </div>
 
