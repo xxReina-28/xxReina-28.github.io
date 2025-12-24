@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Reina | Business Systems & Operations Automation
+title: Nina Suico | Business Systems & Operations Automation
 ---
 
 <section class="section">
@@ -9,7 +9,7 @@ title: Reina | Business Systems & Operations Automation
     <img src="assets/img/profile.jpg" alt="Reina profile photo" class="avatar" />
 
     <div>
-      <h1>Reina</h1>
+      <h1>Niña Peterine Sheen Suico</h1>
 
       <p class="muted">Business Systems. Operations Automation. Data Analytics</p>
       <p class="muted">
