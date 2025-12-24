@@ -9,6 +9,16 @@
 .page-header { display: none !important; }
 .main-content { background: transparent !important; }
 
+/* Hide Cayman skip link (all variants) */
+.skip-to-content,
+#skip-to-content,
+a.skip-to-content,
+a[href="#content"],
+a[href="#main-content"] {
+  display: none !important;
+}
+
+
 /* =========================================================
    Theme variables
    ========================================================= */
