@@ -205,7 +205,7 @@ title: Reina | Business Systems & Operations Automation
         </div>
 
         <ul class="cred-mini">
-          <li><strong>Google × Kaggle</strong> . AI Agents Intensive (Dec 2025)</li>
+          <li><strong>Google × Kaggle</strong> . AI Agents Intensive (Nov 2025)</li>
           <li><strong>Certified ScrumMaster (CSM)</strong></li>
           <li><strong>Lean Six Sigma Yellow Belt</strong></li>
           <li><strong>Salesforce Administrator</strong></li>
@@ -228,7 +228,7 @@ title: Reina | Business Systems & Operations Automation
           <span class="badge">Automation</span>
         </div>
 
-        <p class="muted">December 2025</p>
+        <p class="muted">November 2025</p>
 
         <hr class="cred-divider"/>
 
