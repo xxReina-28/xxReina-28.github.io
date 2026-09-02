@@ -3,7 +3,7 @@ title: "Pipeline Strategist Agent"
 slug: pipeline-strategist-agent
 type: sales-systems
 status: approved
-date: "2025-11"
+date_label: "November 2025"
 summary: "Automated lead ingestion, cleaning, segmentation, scoring, and outbound playbook generation for GTM workflows."
 tools:
   - Python
