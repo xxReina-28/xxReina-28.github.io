@@ -1,0 +1,39 @@
+status: draft
+title: "Inside the Operating System"
+topics:
+  - id: process-architecture
+    name: "Process Architecture"
+    status: draft
+  - id: service-delivery
+    name: "Service Delivery"
+    status: draft
+  - id: handoffs
+    name: "Handoffs"
+    status: draft
+  - id: sop-architecture
+    name: "SOPs"
+    status: draft
+  - id: kpi-systems
+    name: "KPI Systems"
+    status: draft
+  - id: operating-cadence
+    name: "Operating Cadence"
+    status: draft
+  - id: workflow-governance
+    name: "Workflow Governance"
+    status: draft
+  - id: capacity-workload-visibility
+    name: "Capacity / Workload Visibility"
+    status: draft
+  - id: escalation-design
+    name: "Escalation Design"
+    status: draft
+  - id: continuous-improvement
+    name: "Continuous Improvement"
+    status: draft
+  - id: automation-opportunities
+    name: "Automation Opportunities"
+    status: draft
+  - id: management-reporting
+    name: "Management Reporting"
+    status: draft

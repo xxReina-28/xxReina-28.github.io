@@ -1,3 +1,18 @@
-title: Niña Suico · Portfolio
-description: Business Systems ·Operations Automation · Analytics
+title: "Niña Suico · Portfolio"
+description: "Business Systems · Operations Automation · Analytics"
 theme: jekyll-theme-cayman
+
+plugins:
+  - jekyll-seo-tag
+
+collections:
+  case_studies:
+    output: false
+  projects:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

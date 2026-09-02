@@ -1,0 +1,12 @@
+{% assign service = include.service %}
+{% if service.status == 'approved' %}
+  <article class="card service-card" data-service-id="{{ service.id }}">
+    <h3>{{ service.name }}</h3>
+    {% if service.problem %}<p>{{ service.problem }}</p>{% endif %}
+    {% if service.scope and service.scope.size > 0 %}
+      <ul>
+        {% for item in service.scope %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </article>
+{% endif %}

@@ -5,17 +5,26 @@
    Cayman overrides
    ========================================================= */
 
-.skip-to-content { display: none !important; }
 .page-header { display: none !important; }
 .main-content { background: transparent !important; }
 
-/* Hide Cayman skip link (all variants) */
-.skip-to-content,
-#skip-to-content,
-a.skip-to-content,
-a[href="#content"],
-a[href="#main-content"] {
-  display: none !important;
+/* Keyboard users can reveal the skip link without adding permanent chrome. */
+.skip-to-content{
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--bg) !important;
+  font-weight: 700;
+  transform: translateY(-200%);
+  transition: transform 140ms ease;
+}
+
+.skip-to-content:focus{
+  transform: translateY(0);
 }
 
 
@@ -52,6 +61,7 @@ a[href="#main-content"] {
 html { scroll-behavior: smooth; }
 
 body{
+  margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -74,6 +84,86 @@ body{
 /* Links */
 a{ color: var(--accent); text-decoration: none; }
 a:hover{ color: var(--accent-hover); text-decoration: none; }
+
+a:focus-visible,
+summary:focus-visible{
+  outline: 3px solid var(--accent-hover);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Site shell
+   ========================================================= */
+
+.site-header{
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(11, 15, 20, 0.96);
+}
+
+.site-header__inner,
+.site-footer__inner{
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem;
+}
+
+.site-header__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.site-brand{
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.site-nav__list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__list li{ margin: 0; }
+
+.site-nav__link{
+  display: block;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  color: var(--muted);
+}
+
+.site-nav__link:hover,
+.site-nav__link.is-current{
+  background: rgba(43, 213, 118, 0.10);
+  color: var(--text);
+}
+
+.site-nav__link.is-current{
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.site-footer{
+  margin-top: 2rem;
+  border-top: 1px solid var(--card-border);
+  color: var(--muted);
+}
+
+.site-footer p{ margin: 0; }
+
+.page-content{
+  min-height: 45vh;
+}
+
+.page-intro{ margin-bottom: 1.25rem; }
 
 /* =========================================================
    Typography
@@ -112,9 +202,9 @@ li{ margin: 0.25rem 0; }
   gap: 1rem;
 }
 
-/* 3-up auto-fit */
+/* Start with one fluid track so narrow viewports can never force overflow. */
 .grid-3{
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   align-items: start; /* prevents stretching/overlap */
 }
 
@@ -122,9 +212,14 @@ li{ margin: 0.25rem 0; }
 .project-grid{
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   grid-auto-rows: auto;
+}
+
+@media (min-width: 700px){
+  .grid-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .project-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* =========================================================
@@ -140,7 +235,7 @@ li{ margin: 0.25rem 0; }
   transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
   height: auto;
   min-height: 0;
-  overflow: hidden; /* prevents bleed artifacts that look like overlap */
+  overflow: visible;
 }
 
 .card:hover{
@@ -171,6 +266,18 @@ li{ margin: 0.25rem 0; }
 }
 
 @media (max-width: 600px){
+  .site-header__inner{
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .site-nav,
+  .site-nav__list{
+    width: 100%;
+  }
+  .site-nav__list{
+    justify-content: flex-start;
+  }
   .profile{
     grid-template-columns: 1fr;
     text-align: center;
@@ -188,6 +295,9 @@ li{ margin: 0.25rem 0; }
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.6rem;
+  margin-left: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .badge{
@@ -325,11 +435,33 @@ details.cred-details{ margin-top: 0.25rem; }
 }
 
 /* =========================================================
-   Small screens 
+   Small screens
    ========================================================= */
 
 @media (max-width: 420px){
+  .site-header__inner,
+  .site-footer__inner{ padding: 0.9rem 1rem; }
+  .site-nav__list{ gap: 0.2rem; }
+  .site-nav__link{ padding: 0.45rem 0.5rem; }
   .main-content{ padding: 1.4rem 1rem; }
   .card{ padding: 1.1rem; }
   .badge{ font-size: 0.78rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .card:hover,
+  .btn:hover{
+    transform: none;
+  }
 }

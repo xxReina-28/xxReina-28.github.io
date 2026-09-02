@@ -1,0 +1,56 @@
+- id: operations-process-review
+  name: "Operations & Process Review"
+  status: draft
+  problem: ""
+  scope: []
+  deliverables: []
+  ideal_for: []
+  related_capabilities:
+    - business-operations-process-design
+  cta_id: ""
+
+- id: sales-crm-systems-review
+  name: "Sales / CRM Systems Review"
+  status: draft
+  problem: ""
+  scope: []
+  deliverables: []
+  ideal_for: []
+  related_capabilities:
+    - sales-systems-revenue-operations
+    - crm-workflow-automation
+  cta_id: ""
+
+- id: workflow-automation
+  name: "Workflow Automation"
+  status: draft
+  problem: ""
+  scope: []
+  deliverables: []
+  ideal_for: []
+  related_capabilities:
+    - crm-workflow-automation
+  cta_id: ""
+
+- id: reporting-dashboard-design
+  name: "Reporting & Dashboard Design"
+  status: draft
+  problem: ""
+  scope: []
+  deliverables: []
+  ideal_for: []
+  related_capabilities:
+    - reporting-analytics-decision-support
+  cta_id: ""
+
+- id: business-systems-improvement
+  name: "Business Systems Improvement"
+  status: draft
+  problem: ""
+  scope: []
+  deliverables: []
+  ideal_for: []
+  related_capabilities:
+    - business-operations-process-design
+    - crm-workflow-automation
+  cta_id: ""

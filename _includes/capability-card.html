@@ -1,0 +1,14 @@
+{% assign capability = include.capability %}
+{% if capability.status == 'approved' %}
+  <article class="card capability-card" data-capability-id="{{ capability.id }}">
+    <h3>{{ capability.title }}</h3>
+    {% assign approved_claims = capability.claims | where: 'status', 'approved' %}
+    {% if approved_claims.size > 0 %}
+      <ul>
+        {% for claim in approved_claims %}
+          <li>{{ claim.label }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </article>
+{% endif %}

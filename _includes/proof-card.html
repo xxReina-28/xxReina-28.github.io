@@ -1,0 +1,8 @@
+{% assign proof = include.proof %}
+{% if proof.status == 'approved' %}
+  <article class="card proof-card" data-proof-id="{{ proof.id }}">
+    {% if proof.label %}<h3>{{ proof.label }}</h3>{% endif %}
+    {% if proof.claim %}<p>{{ proof.claim }}</p>{% endif %}
+    {% if proof.evidence %}<p class="muted">{{ proof.evidence }}</p>{% endif %}
+  </article>
+{% endif %}

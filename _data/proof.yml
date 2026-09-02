@@ -1,0 +1,3 @@
+# Future items separate a public `claim` from its supporting `evidence` and
+# may reference approved capability, project, case-study, or credential IDs.
+items: []

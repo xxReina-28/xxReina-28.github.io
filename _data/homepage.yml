@@ -1,0 +1,20 @@
+status: draft
+sections:
+  - id: hero
+    source: positioning
+  - id: business-problems
+    source: proof
+  - id: core-capabilities
+    source: capabilities
+  - id: featured-work
+    source: featured
+  - id: operations-perspective
+    source: operations
+  - id: selected-outcomes
+    source: proof
+  - id: credentials
+    source: credentials
+  - id: about
+    source: existing-homepage
+  - id: final-cta
+    source: ctas

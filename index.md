@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Nina Suico | Business Systems & Operations Automation
+title: "Niña Suico | Business Systems & Operations Automation"
 ---
 
 <section class="section">
 
   <div class="profile card">
-    <img src="assets/img/profile.jpg" alt="Reina profile photo" class="avatar" />
+    <img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Reina profile photo" class="avatar" />
 
     <div>
       <h1>Niña Peterine Sheen Suico</h1>
@@ -17,7 +17,7 @@ title: Nina Suico | Business Systems & Operations Automation
       </p>
 
       <div class="btn-row">
-        <a class="btn" href="assets/docs/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="{{ '/assets/docs/resume.pdf' | relative_url }}" target="_blank" rel="noopener">Resume</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -208,7 +208,6 @@ title: Nina Suico | Business Systems & Operations Automation
           <li><strong>Google × Kaggle</strong> . AI Agents Intensive (Nov 2025)</li>
           <li><strong>Certified ScrumMaster (CSM)</strong></li>
           <li><strong>Lean Six Sigma Yellow Belt</strong></li>
-          <li><strong>Salesforce Administrator</strong></li>
           <li><strong>HubSpot</strong> . Sales, Marketing, Reporting</li>
         </ul>
       </summary>
@@ -235,7 +234,6 @@ title: Nina Suico | Business Systems & Operations Automation
         <ul class="cred-list">
           <li><strong>Certified ScrumMaster (CSM)</strong></li>
           <li><strong>Lean Six Sigma Yellow Belt</strong></li>
-          <li><strong>Salesforce Administrator</strong></li>
           <li><strong>HubSpot Certifications</strong> . Sales, Marketing, Reporting</li>
         </ul>
 
