@@ -186,7 +186,7 @@ foreach ($duplicate in @($careerPriorities | Group-Object | Where-Object Count -
 $approvedChronology = @{
     "canadian-telecommunications-account" = @("August 2016", "January 2017")
     "eo-business-process-outsourcing" = @("April 2017", "September 2017")
-    "neuto" = @("December 2017", "May 2019")
+    "executive-assistant-personal-assistant" = @("December 2017", "May 2019")
     "blitz" = @("June 2019", "July 2022")
     "shang-li-information-technology" = @("November 2019", "May 2020")
     "fast-gateway-system" = @("April 2022", "July 2022")
@@ -210,9 +210,30 @@ if ($careerRecords.ContainsKey("bpo-sales-group") -and
     (Get-ScalarValue -Content $careerRecords["bpo-sales-group"] -Key "actual_title") -ne "Director of Client Services") {
     $failures.Add("Current BPO Sales Group title must remain Director of Client Services")
 }
-if (-not $careerRecords.ContainsKey("neuto") -or
-    (Get-ScalarValue -Content $careerRecords["neuto"] -Key "actual_title") -notmatch 'Executive Assistant|Personal Assistant') {
+if (-not $careerRecords.ContainsKey("executive-assistant-personal-assistant")) {
     $failures.Add("The Executive Assistant/Personal Assistant career chapter must remain present")
+} else {
+    $assistantRecord = $careerRecords["executive-assistant-personal-assistant"]
+    if ((Get-ScalarValue -Content $assistantRecord -Key "actual_title") -ne "Executive Assistant & Personal Assistant") {
+        $failures.Add("The EA/PA career chapter must retain its actual title")
+    }
+    if ((Get-ScalarValue -Content $assistantRecord -Key "organization") -ne "Various Employers") {
+        $failures.Add("The EA/PA career chapter must use Various Employers as its organization")
+    }
+    if ((Get-ScalarValue -Content $assistantRecord -Key "employment_context") -ne "Private business principal, diplomatic principals, and Neuto Entertainment") {
+        $failures.Add("The EA/PA career chapter must retain its approved privacy-safe employment context")
+    }
+}
+if (-not $careerRecords.ContainsKey("fast-gateway-system")) {
+    $failures.Add("The Fast Gateway System career chapter must remain present")
+} else {
+    $fastGatewayRecord = $careerRecords["fast-gateway-system"]
+    if ((Get-ScalarValue -Content $fastGatewayRecord -Key "organization") -ne "Fast Gateway System") {
+        $failures.Add("The April-July 2022 organization must remain Fast Gateway System")
+    }
+    if ((Get-ScalarValue -Content $fastGatewayRecord -Key "actual_title") -ne "Customer Operations Lead") {
+        $failures.Add("The Fast Gateway System title must remain Customer Operations Lead")
+    }
 }
 
 $statusFiles = @(

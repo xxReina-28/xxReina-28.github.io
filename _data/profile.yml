@@ -78,9 +78,9 @@ career_progression:
       - operating-systems
       - decision-systems
 
-  - id: neuto
+  - id: executive-assistant-personal-assistant
     stage_id: administrative-coordination
-    organization: "Neuto"
+    organization: "Various Employers"
     actual_title: "Executive Assistant & Personal Assistant"
     start_label: "December 2017"
     end_label: "May 2019"
@@ -90,7 +90,7 @@ career_progression:
     sort_end_month: 5
     display_priority: 3
     evidence_status: self-reported
-    source_context: "The public résumé groups this chapter under Various Employers and displays 2017-2019; the organization and month range follow the approved chronology."
+    employment_context: "Private business principal, diplomatic principals, and Neuto Entertainment"
     scope: "Executive, administrative, and personal support across confidential and time-sensitive priorities."
     bullets:
       - "Supported calendars, travel, correspondence, confidential documentation, and business priorities."
@@ -153,7 +153,6 @@ career_progression:
     display_priority: 6
     evidence_status: self-reported
     concurrent_note: "Concurrent with other work during this period."
-    source_context: "The approved chronology names Fast Gateway Enterprises; the current public résumé names Fast Gateway System. The résumé name is retained pending confirmation."
     scope: "Remote customer operations for a fintech platform, including escalation, workflow, and reporting support."
     bullets:
       - "Coordinated customer escalations, agent activity, KYC/AML workflow support, and fraud-response tracking."
