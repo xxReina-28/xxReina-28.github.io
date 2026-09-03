@@ -1,0 +1,10 @@
+{% assign capability_id = include.capability_id %}
+<svg class="capability-mark" viewBox="0 0 88 56" aria-hidden="true" focusable="false">
+  {% if capability_id == 'operating-systems' %}
+    <path d="M10 28h22m24 0h22M32 28l12-16 12 16-12 16z"/><circle cx="10" cy="28" r="5"/><circle cx="78" cy="28" r="5"/>
+  {% elsif capability_id == 'revenue-client-systems' %}
+    <path d="M8 42h18V30h18V18h18V8h18"/><circle cx="8" cy="42" r="5"/><circle cx="44" cy="18" r="5"/><circle cx="80" cy="8" r="5"/>
+  {% else %}
+    <path d="M10 10h28v14h18v22h22M38 10v36H10"/><circle cx="10" cy="10" r="5"/><circle cx="10" cy="46" r="5"/><circle cx="78" cy="46" r="5"/>
+  {% endif %}
+</svg>

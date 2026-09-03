@@ -1,7 +1,8 @@
 <header class="site-header">
-  <div class="site-header__inner">
+  <div class="site-header__inner glass-surface">
     <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="Nina Suico home">
-      Nina Suico
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-identity"><strong>Nina Suico</strong><small>Business Operations &amp; Systems Analyst</small></span>
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
@@ -10,6 +11,9 @@
           {% assign item_url = item.url | relative_url %}
           {% assign is_current = false %}
           {% if page.url == item.url %}
+            {% assign is_current = true %}
+          {% endif %}
+          {% if item.url != '/' and page.url contains item.url %}
             {% assign is_current = true %}
           {% endif %}
           <li>

@@ -486,6 +486,33 @@ if ($config -notmatch '(?ms)projects:\s*\r?\n\s+output:\s+true\s*\r?\n\s+permali
     $failures.Add("Project collection must output at /work/:slug/")
 }
 
+$styleContent = Get-Content -LiteralPath (Join-Path $sourceRoot "assets\css\style.scss") -Raw -Encoding utf8
+foreach ($designToken in @(
+    "--color-bg", "--color-surface", "--color-border", "--color-text",
+    "--color-muted", "--color-primary", "--color-secondary", "--color-tertiary", "--color-focus"
+)) {
+    if ($styleContent -notmatch ('(?m)^\s*' + [regex]::Escape($designToken) + ':')) {
+        $failures.Add("Midnight Executive Systems stylesheet is missing token: $designToken")
+    }
+}
+if ($styleContent -match '(?i)(?:linear|radial|conic)-gradient\s*\(') {
+    $failures.Add("Midnight Executive Systems must not use CSS gradients")
+}
+if ($styleContent -notmatch '(?ms)body\s*\{.*?background:\s*var\(--color-bg\)') {
+    $failures.Add("Page background must use the solid midnight background token")
+}
+
+$defaultLayoutContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_layouts\default.html") -Raw -Encoding utf8
+if ($defaultLayoutContent -notmatch 'class="skip-to-content"' -or $defaultLayoutContent -notmatch 'href="#main-content"') {
+    $failures.Add("Default layout must retain the skip-to-content link")
+}
+$systemsMapContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_includes\systems-map.html") -Raw -Encoding utf8
+if ($systemsMapContent -notmatch '<title\s+id="systems-map-title">' -or
+    $systemsMapContent -notmatch '<desc\s+id="systems-map-desc">' -or
+    $systemsMapContent -notmatch 'aria-labelledby="systems-map-title systems-map-desc"') {
+    $failures.Add("Hero systems map must retain an accessible title and description")
+}
+
 $publicationGuards = @(
     "_includes\capability-card.html",
     "_includes\work-card.html",

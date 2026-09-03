@@ -1,5 +1,5 @@
 {% assign role = include.role %}
-<article class="career-role">
+<article class="career-role" data-evidence-status="{{ role.evidence_status }}">
   <header>
     <p class="career-role-dates">{{ role.start_label }} to {{ role.end_label }}</p>
     <h3>{{ role.actual_title }}</h3>

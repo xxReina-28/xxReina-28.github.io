@@ -1,6 +1,6 @@
 {% assign cta = include.cta %}
 {% if cta.status == 'approved' %}
-  <aside class="card cta-block" data-cta-id="{{ cta.id }}" aria-labelledby="cta-{{ cta.id }}">
+  <aside class="card glass-surface cta-block" data-cta-id="{{ cta.id }}" aria-labelledby="cta-{{ cta.id }}">
     <h2 id="cta-{{ cta.id }}">{{ cta.heading }}</h2>
     {% if cta.body %}<p>{{ cta.body }}</p>{% endif %}
     {% if cta.url and cta.label %}

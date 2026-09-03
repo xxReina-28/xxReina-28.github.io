@@ -1,10 +1,12 @@
 {% assign profile = site.data.profile %}
 <div class="career-progression">
   {% for stage in profile.career_stages %}
-    <details class="career-stage"{% if stage.expanded %} open{% endif %}>
+    <details class="career-stage glass-surface"{% if stage.expanded %} open{% endif %}>
       <summary>
+        <span class="career-stage-index" aria-hidden="true">0{{ forloop.index }}</span>
         <span class="career-stage-title">{{ stage.title }}</span>
         <span class="career-stage-summary">{{ stage.summary }}</span>
+        <span class="career-stage-toggle" aria-hidden="true"></span>
       </summary>
       <div class="career-role-list">
         {% for role in profile.career_progression %}
