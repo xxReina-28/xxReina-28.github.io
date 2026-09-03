@@ -43,8 +43,11 @@ jobs:
           $ErrorActionPreference = "Stop"
           $env:JEKYLL_ENV = "production"
           $buildLog = Join-Path $env:RUNNER_TEMP "jekyll-build.log"
+          $qaConfig = Join-Path $env:RUNNER_TEMP "portfolio-visual-qa-config.yml"
+          Set-Content -LiteralPath $qaConfig -Value 'baseurl: ""' -Encoding utf8
+          $configPaths = "_config.yml,$qaConfig"
           $ErrorActionPreference = "Continue"
-          bundle exec jekyll build --trace --baseurl "" 2>&1 | Tee-Object -FilePath $buildLog
+          bundle exec jekyll build --trace --config $configPaths 2>&1 | Tee-Object -FilePath $buildLog
           $buildExitCode = $LASTEXITCODE
           $ErrorActionPreference = "Stop"
           if ($buildExitCode -ne 0) {
