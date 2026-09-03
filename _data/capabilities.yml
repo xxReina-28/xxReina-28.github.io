@@ -1,107 +1,75 @@
-- id: sales-systems-revenue-operations
-  title: "Sales Systems & Revenue Operations"
+- id: operating-systems
+  title: "Operating Systems"
   status: approved
+  evidence_status: self-reported
   claims:
-    - id: crm-structure-optimization
-      label: "CRM systems design & optimization"
+    - id: workflow-process-design
+      label: "Workflow and process design"
       status: approved
-      platforms:
-        - Salesforce
-      evidence:
-        - type: credential
-          id: hubspot-certifications
-    - id: sales-workflow-support
-      label: "Sales workflow and pipeline support"
+    - id: sops-operating-controls
+      label: "SOPs and operating controls"
       status: approved
-      evidence:
-        - type: project
-          id: pipeline-strategist-agent
-    - id: sales-process-architecture
-      label: "Sales process architecture"
-      status: draft
-      evidence: []
-    - id: lead-lifecycle-handoffs
-      label: "Lead lifecycle and handoff design"
-      status: draft
-      evidence: []
-    - id: revenue-operations-support
-      label: "Revenue operations support"
-      status: future
-      evidence: []
+    - id: project-delivery-coordination
+      label: "Project delivery coordination"
+      status: approved
+    - id: cross-functional-handoffs
+      label: "Cross-functional handoffs"
+      status: approved
+    - id: client-service-operations
+      label: "Client and service operations"
+      status: approved
+    - id: continuous-improvement
+      label: "Continuous improvement"
+      status: approved
 
-- id: business-operations-process-design
-  title: "Business Operations & Process Design"
+- id: revenue-client-systems
+  title: "Revenue & Client Systems"
   status: approved
+  evidence_status: self-reported
+  platforms:
+    - Salesforce
+    - HubSpot
+    - Zoho
   claims:
-    - id: process-mapping-documentation
-      label: "Process mapping, SOPs, and system documentation"
+    - id: sales-operations
+      label: "Sales operations"
       status: approved
-      evidence: []
-    - id: workflow-redesign
-      label: "Business process optimization and workflow redesign"
+    - id: crm-enablement-governance
+      label: "CRM enablement and governance"
       status: approved
-      evidence:
-        - type: project
-          id: employee-of-the-month-automation
-    - id: kpi-frameworks
-      label: "KPI definition, monitoring, and reporting"
+    - id: pipeline-qualification-workflows
+      label: "Pipeline and qualification workflows"
       status: approved
-      evidence:
-        - type: project
-          id: employee-of-the-month-automation
-    - id: operating-cadence-governance
-      label: "Operating cadence and workflow governance"
-      status: draft
-      evidence: []
-    - id: capacity-workload-visibility
-      label: "Capacity and workload visibility"
-      status: future
-      evidence: []
+    - id: client-lifecycle-operations
+      label: "Client lifecycle operations"
+      status: approved
+    - id: commercial-coordination
+      label: "Commercial coordination"
+      status: approved
+    - id: sales-delivery-handoffs
+      label: "Sales-to-delivery handoffs"
+      status: approved
 
-- id: crm-workflow-automation
-  title: "CRM & Workflow Automation"
+- id: decision-systems
+  title: "Decision Systems"
   status: approved
+  evidence_status: self-reported
   claims:
-    - id: workflow-automation
-      label: "Workflow automation (forms, approvals, reminders)"
+    - id: operational-reporting
+      label: "Operational reporting"
       status: approved
-      evidence:
-        - type: project
-          id: employee-of-the-month-automation
-    - id: task-notification-automation
-      label: "Task automation and notification workflows"
+    - id: kpi-design-monitoring
+      label: "KPI design and monitoring"
       status: approved
-      evidence:
-        - type: project
-          id: employee-of-the-month-automation
-    - id: cross-platform-integrations
-      label: "Cross-platform integrations and operational tooling"
+    - id: dashboard-requirements
+      label: "Dashboard requirements"
       status: approved
-      evidence: []
-    - id: advanced-system-integrations
-      label: "Advanced system integrations where supported"
-      status: draft
-      evidence: []
-
-- id: reporting-analytics-decision-support
-  title: "Reporting, Analytics & Decision Support"
-  status: approved
-  claims:
-    - id: operational-dashboards-reporting
-      label: "Operational dashboards and reporting"
+    - id: decision-frameworks
+      label: "Decision frameworks"
       status: approved
-      evidence:
-        - type: project
-          id: employee-of-the-month-automation
-    - id: sql-power-bi-analysis
-      label: "SQL-based analysis and Power BI reporting"
+    - id: data-supported-prioritization
+      label: "Data-supported prioritization"
       status: approved
-      evidence: []
-    - id: decision-ready-insights
-      label: "Translating data into decision-ready insights"
+    - id: procurement-supplier-evaluation
+      label: "Procurement and supplier evaluation"
       status: approved
-      evidence: []
-    - id: management-visibility
-      label: "Management visibility and decision-support tools"
-      status: draft
-      evidence: []

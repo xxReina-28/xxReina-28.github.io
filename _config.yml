@@ -1,5 +1,14 @@
-title: "Niña Suico · Portfolio"
-description: "Business Systems · Operations Automation · Analytics"
+title: "Nina Suico | Business Operations & Systems Analyst"
+description: "Business operations and systems portfolio focused on workflow design, sales and client operations, project delivery, reporting, and decision support across Southeast Asia/APAC."
+url: "https://xxreina-28.github.io"
+author:
+  name: "Nina Suico"
+  url: "https://www.linkedin.com/in/ninasuico/"
+social:
+  name: "Nina Suico"
+  links:
+    - "https://www.linkedin.com/in/ninasuico/"
+    - "https://github.com/xxReina-28"
 theme: jekyll-theme-cayman
 
 plugins:
@@ -7,12 +16,24 @@ plugins:
 
 collections:
   case_studies:
-    output: false
+    output: true
+    permalink: /work/:slug/
   projects:
-    output: false
+    output: true
+    permalink: /work/:slug/
 
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: work
+  - scope:
+      path: ""
+      type: case_studies
+    values:
+      layout: work

@@ -10,5 +10,8 @@
         {% endfor %}
       </ul>
     {% endif %}
+    {% if capability.platforms and capability.platforms.size > 0 %}
+      <p class="muted capability-platforms"><strong>Platform exposure:</strong> {{ capability.platforms | join: ', ' }}</p>
+    {% endif %}
   </article>
 {% endif %}

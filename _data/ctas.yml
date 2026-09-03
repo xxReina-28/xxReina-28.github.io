@@ -1,2 +1,7 @@
-# CTA records may contain: id, status, heading, body, label, and url.
-items: []
+items:
+  - id: contact
+    status: approved
+    heading: "Start a conversation"
+    body: "For full-time opportunities across Southeast Asia/APAC or selective consulting and project work, get in touch through an existing channel."
+    label: "Contact Nina"
+    url: "/contact/"

@@ -1,0 +1,36 @@
+status: approved
+name: "Nina Suico"
+role: "Business Operations & Systems Analyst"
+value_proposition: "I fix the gaps between Sales, Operations, and Client Delivery."
+supporting_statement: "I turn fragmented workflows, unclear handoffs, and disconnected operational data into practical systems teams can use and leaders can act on."
+location_label: "Kuala Lumpur, Malaysia"
+mobility_label: "Mobile across Southeast Asia"
+availability_label: "Open to remote and relocation opportunities"
+market_context: "Growing and operationally complex companies across Southeast Asia/APAC."
+markets:
+  - Singapore
+  - Malaysia
+  - Philippines
+  - Thailand
+  - Vietnam
+  - Indonesia
+professional_narrative:
+  - "My work sits between operations and technology. I examine how work moves across teams, where information breaks down, and which controls or tools can make execution clearer."
+  - "My background spans client services, BPO operations, and cross-functional environments across fintech, cybersecurity, crypto, and B2B services."
+career_progression: []
+industries:
+  - Fintech
+  - Cybersecurity
+  - Crypto
+  - BPO and client services
+  - B2B services
+working_style:
+  - "Clarity before complexity"
+  - "Documented ownership and handoffs"
+  - "Practical controls teams can maintain"
+  - "Decision support grounded in operational context"
+contact:
+  linkedin: "https://www.linkedin.com/in/ninasuico/"
+  email: "mailto:ninasuicox@gmail.com"
+  github: "https://github.com/xxReina-28"
+  resume: "/assets/docs/resume.pdf"

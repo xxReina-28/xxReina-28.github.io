@@ -5,6 +5,13 @@ $ErrorActionPreference = "Stop"
 $sourceRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $failures = [System.Collections.Generic.List[string]]::new()
 $allowedStatuses = @("approved", "draft", "future")
+$allowedWorkKinds = @("professional", "portfolio-simulation", "technical-project", "educational-capstone", "proposed-system", "pending-classification")
+$allowedEvidenceStatuses = @("verified", "artifact-supported", "self-reported", "unverified", "synthetic", "not-applicable")
+$allowedVerificationStatuses = @("verified", "artifact-supported", "self-reported", "unverified", "not-applicable")
+$allowedImplementationStatuses = @("implemented", "completed-project", "documented-demonstration", "simulated", "proposed", "not-applicable")
+$allowedDataClassifications = @("professional", "synthetic", "mixed", "not-applicable")
+$allowedOutcomeStatuses = @("verified", "artifact-supported", "self-reported", "unverified", "synthetic", "not-applicable")
+$allowedCredentialStatuses = @("verified", "artifact-supported", "self-reported", "unverified")
 
 function Get-FrontMatter {
     param([string]$Path)
@@ -23,7 +30,7 @@ function Get-ScalarValue {
         [string]$Key
     )
 
-    $pattern = '(?m)^' + [regex]::Escape($Key) + ':\s*"?([^"\r\n]+)"?\s*$'
+    $pattern = '(?m)^\s*' + [regex]::Escape($Key) + ':\s*"?([^"\r\n]+)"?\s*$'
     $match = [regex]::Match($Content, $pattern)
     if ($match.Success) {
         return $match.Groups[1].Value.Trim()
@@ -50,7 +57,7 @@ function Get-ListValues {
 }
 
 $requiredDataFiles = @(
-    "positioning.yml",
+    "profile.yml",
     "homepage.yml",
     "capabilities.yml",
     "operations.yml",
@@ -67,6 +74,16 @@ foreach ($fileName in $requiredDataFiles) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
         $failures.Add("Missing required data file: _data/$fileName")
     }
+}
+
+$profileContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_data\profile.yml") -Raw -Encoding utf8
+foreach ($requiredProfileField in @("name", "role", "value_proposition", "supporting_statement", "location_label")) {
+    if ([string]::IsNullOrWhiteSpace((Get-ScalarValue -Content $profileContent -Key $requiredProfileField))) {
+        $failures.Add("Profile is missing required field: $requiredProfileField")
+    }
+}
+if ((Get-ScalarValue -Content $profileContent -Key "name") -ne "Nina Suico") {
+    $failures.Add("Canonical public profile name must be Nina Suico")
 }
 
 $statusFiles = @(
@@ -110,6 +127,24 @@ if ($salesforceCredentialBlock.Success -and
     $failures.Add("Salesforce Administrator or certification language cannot be an approved credential without verified evidence")
 }
 
+foreach ($credentialBlock in [regex]::Matches($credentialContent, '(?ms)^- id:\s*[^\r\n]+\r?\n(?<record>.*?)(?=^- id:|\z)')) {
+    $record = $credentialBlock.Value
+    $credentialId = [regex]::Match($record, '(?m)^- id:\s*["'']?([^"''\s]+)').Groups[1].Value
+    $credentialStatus = Get-ScalarValue -Content $record -Key "credential_status"
+    $verificationStatus = Get-ScalarValue -Content $record -Key "verification_status"
+    if ([string]::IsNullOrWhiteSpace($credentialStatus) -or $allowedCredentialStatuses -notcontains $credentialStatus) {
+        $failures.Add("Credential '$credentialId' has missing or invalid credential_status")
+    }
+    if ([string]::IsNullOrWhiteSpace($verificationStatus) -or $allowedVerificationStatuses -notcontains $verificationStatus) {
+        $failures.Add("Credential '$credentialId' has missing or invalid verification_status")
+    }
+    if ($record -match '(?im)^\s*status:\s*approved\s*$' -and
+        $verificationStatus -eq "verified" -and
+        [string]::IsNullOrWhiteSpace((Get-ScalarValue -Content $record -Key "evidence_url"))) {
+        $failures.Add("Published verified credential '$credentialId' must include evidence_url")
+    }
+}
+
 $homepageContent = Get-Content -LiteralPath (Join-Path $sourceRoot "index.md") -Raw -Encoding utf8
 if ($homepageContent -match '(?i)Salesforce\s+(?:Certified\s+)?Administrator|Salesforce\s+certification') {
     $failures.Add("Homepage contains Salesforce certification language")
@@ -135,6 +170,13 @@ foreach ($collection in @("projects", "case_studies")) {
         $status = Get-ScalarValue -Content $frontMatter -Key "status"
         $title = Get-ScalarValue -Content $frontMatter -Key "title"
         $type = Get-ScalarValue -Content $frontMatter -Key "type"
+        $workKind = Get-ScalarValue -Content $frontMatter -Key "work_kind"
+        $evidenceStatus = Get-ScalarValue -Content $frontMatter -Key "evidence_status"
+        $verificationStatus = Get-ScalarValue -Content $frontMatter -Key "verification_status"
+        $implementationStatus = Get-ScalarValue -Content $frontMatter -Key "implementation_status"
+        $dataClassification = Get-ScalarValue -Content $frontMatter -Key "data_classification"
+        $outcomeStatus = Get-ScalarValue -Content $frontMatter -Key "outcome_status"
+        $disclosure = Get-ScalarValue -Content $frontMatter -Key "disclosure"
         if ([string]::IsNullOrWhiteSpace($slug)) {
             $failures.Add("Collection document has no slug: $($file.Name)")
             continue
@@ -147,6 +189,32 @@ foreach ($collection in @("projects", "case_studies")) {
         }
         if ($collection -eq "projects" -and [string]::IsNullOrWhiteSpace($type)) {
             $failures.Add("Project document has no type: $($file.Name)")
+        }
+        if ($allowedWorkKinds -notcontains $workKind) {
+            $failures.Add("Work document has missing or invalid work_kind: $($file.Name)")
+        }
+        if ($allowedEvidenceStatuses -notcontains $evidenceStatus) {
+            $failures.Add("Work document has missing or invalid evidence_status: $($file.Name)")
+        }
+        if ($allowedVerificationStatuses -notcontains $verificationStatus) {
+            $failures.Add("Work document has missing or invalid verification_status: $($file.Name)")
+        }
+        if ($allowedImplementationStatuses -notcontains $implementationStatus) {
+            $failures.Add("Work document has missing or invalid implementation_status: $($file.Name)")
+        }
+        if ($allowedDataClassifications -notcontains $dataClassification) {
+            $failures.Add("Work document has missing or invalid data_classification: $($file.Name)")
+        }
+        if ($allowedOutcomeStatuses -notcontains $outcomeStatus) {
+            $failures.Add("Work document has missing or invalid outcome_status: $($file.Name)")
+        }
+        if ($status -eq "approved" -and
+            ($workKind -eq "portfolio-simulation" -or $dataClassification -eq "synthetic") -and
+            ($disclosure -notmatch '(?i)synthetic|simulat')) {
+            $failures.Add("Published simulation or synthetic work lacks a disclosure: $($file.Name)")
+        }
+        if ($frontMatter -match '(?m)^date:\s*["'']?\d{4}-\d{2}["'']?\s*$') {
+            $failures.Add("Collection document uses an incomplete reserved Jekyll date: $($file.Name)")
         }
         $collectionSlugs.Add($slug)
 
@@ -184,16 +252,6 @@ foreach ($evidenceMatch in [regex]::Matches($capabilitiesContent, '(?ms)^\s*- ty
     }
 }
 
-$servicesContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_data\services.yml") -Raw -Encoding utf8
-foreach ($relatedBlock in [regex]::Matches($servicesContent, '(?ms)^\s+related_capabilities:\s*\r?\n(?<items>(?:\s+-\s+[^\r\n]+\r?\n?)*)')) {
-    foreach ($itemMatch in [regex]::Matches($relatedBlock.Groups['items'].Value, '(?m)^\s+-\s+([^\s]+)\s*$')) {
-        $id = $itemMatch.Groups[1].Value.Trim('"', "'")
-        if ($groupCapabilityIds -notcontains $id) {
-            $failures.Add("Broken service capability reference: $id")
-        }
-    }
-}
-
 $featuredContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_data\featured.yml") -Raw -Encoding utf8
 $featuredProjectIds = @(Get-ListValues -Content $featuredContent -Key "projects")
 $featuredCaseStudyIds = @(Get-ListValues -Content $featuredContent -Key "case_studies")
@@ -228,11 +286,11 @@ foreach ($caseStudyId in $caseStudyRecords.Keys) {
 }
 
 $config = Get-Content -LiteralPath (Join-Path $sourceRoot "_config.yml") -Raw -Encoding utf8
-if ($config -notmatch '(?ms)case_studies:\s*\r?\n\s+output:\s+false') {
-    $failures.Add("Case-study collection must keep output disabled")
+if ($config -notmatch '(?ms)case_studies:\s*\r?\n\s+output:\s+true\s*\r?\n\s+permalink:\s*/work/:slug/') {
+    $failures.Add("Case-study collection must output at /work/:slug/")
 }
-if ($config -notmatch '(?ms)projects:\s*\r?\n\s+output:\s+false') {
-    $failures.Add("Project collection must keep output disabled")
+if ($config -notmatch '(?ms)projects:\s*\r?\n\s+output:\s+true\s*\r?\n\s+permalink:\s*/work/:slug/') {
+    $failures.Add("Project collection must output at /work/:slug/")
 }
 
 $publicationGuards = @(
@@ -251,8 +309,47 @@ foreach ($relativePath in $publicationGuards) {
 }
 
 $workPage = Get-Content -LiteralPath (Join-Path $sourceRoot "work\index.md") -Raw -Encoding utf8
-if ($workPage -notmatch "where:\s*'status',\s*'approved'") {
-    $failures.Add("Work page must filter projects to approved status")
+$workGrid = Get-Content -LiteralPath (Join-Path $sourceRoot "_includes\work-grid.html") -Raw -Encoding utf8
+if ($workPage -notmatch 'include\s+work-grid\.html' -or
+    $workGrid -notmatch "site\.projects\s*\|\s*where:\s*'status',\s*'approved'" -or
+    $workGrid -notmatch "site\.case_studies\s*\|\s*where:\s*'status',\s*'approved'") {
+    $failures.Add("Work page and grid must filter projects and case studies to approved status")
+}
+
+$navigationContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_data\navigation.yml") -Raw -Encoding utf8
+foreach ($requiredRoute in @("/", "/work/", "/about/", "/contact/")) {
+    if ($navigationContent -notmatch ('(?m)^\s*url:\s*' + [regex]::Escape($requiredRoute) + '\s*$')) {
+        $failures.Add("Primary navigation is missing required route: $requiredRoute")
+    }
+}
+if ($navigationContent -match '(?m)^\s*url:\s*/(?:operations|services)/\s*$') {
+    $failures.Add("Unfinished Operations or Services page appears in primary navigation")
+}
+
+$publicTextFiles = @(
+    Join-Path $sourceRoot "index.md"
+    Join-Path $sourceRoot "_config.yml"
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "_data") -File | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "_includes") -File | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "_layouts") -File | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "work") -File -Recurse | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "about") -File -Recurse | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "contact") -File -Recurse | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "_projects") -Filter "*.md" -File | Select-Object -ExpandProperty FullName
+    Get-ChildItem -LiteralPath (Join-Path $sourceRoot "_case_studies") -Filter "*.md" -File | Select-Object -ExpandProperty FullName
+)
+foreach ($publicTextFile in $publicTextFiles) {
+    $publicText = Get-Content -LiteralPath $publicTextFile -Raw -Encoding utf8
+    if ($publicText -match '(?i)Salesforce\s+(?:Certified\s+)?Administrator|Salesforce\s+certification') {
+        $failures.Add("Prohibited Salesforce credential language in publishable source: $publicTextFile")
+    }
+    if ($publicText -match 'Niña|Peterine|Sheen') {
+        $failures.Add("Non-canonical public name in publishable source: $publicTextFile")
+    }
+    $withoutAllowedGithubIdentity = $publicText -replace '(?i)https?://[^\s"'']*xxReina-28[^\s"'']*', ''
+    if ($withoutAllowedGithubIdentity -match '(?i)\bReina\b') {
+        $failures.Add("Non-canonical Reina display name in publishable source: $publicTextFile")
+    }
 }
 
 if ($failures.Count -gt 0) {

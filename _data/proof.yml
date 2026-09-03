@@ -1,3 +1,3 @@
-# Future items separate a public `claim` from its supporting `evidence` and
-# may reference approved capability, project, case-study, or credential IDs.
+# Publish a proof item only when its claim and supporting evidence have been reviewed.
+# Allowed evidence_status values are documented in README.md and enforced by validation.
 items: []

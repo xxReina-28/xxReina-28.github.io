@@ -2,7 +2,7 @@
   url: /
 - label: Work
   url: /work/
-- label: Operations
-  url: /operations/
-- label: Services
-  url: /services/
+- label: About
+  url: /about/
+- label: Contact
+  url: /contact/

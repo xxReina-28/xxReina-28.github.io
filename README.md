@@ -1,4 +1,4 @@
-# Niña Suico Portfolio
+# Nina Suico Portfolio
 
 This repository contains the Jekyll source for the portfolio published through GitHub Pages.
 
@@ -34,8 +34,8 @@ After a production build, verify that these files exist:
 
 - `_site/index.html`
 - `_site/work/index.html`
-- `_site/operations/index.html`
-- `_site/services/index.html`
+- `_site/about/index.html`
+- `_site/contact/index.html`
 
 The repository includes a lightweight route and local-link check:
 
@@ -53,20 +53,20 @@ The public pages use a small set of manually maintained Jekyll data files and co
 
 | Content | Location | Purpose |
 | --- | --- | --- |
-| Positioning | `_data/positioning.yml` | Working role, value proposition, capability line, audience context, and future SEO fields |
-| Homepage order | `_data/homepage.yml` | Future business-facing section hierarchy and its data sources |
-| Capabilities | `_data/capabilities.yml` | Four capability groups, individual claims, publication states, and evidence references |
-| Operations model | `_data/operations.yml` | Draft-safe topics for the future Operations narrative |
-| Services | `_data/services.yml` | Working engagement categories and their related capabilities |
+| Profile and positioning | `_data/profile.yml` | Canonical public name, role, value proposition, location, market context, narrative, and contact channels |
+| Homepage content | `_data/homepage.yml` | Homepage-specific problems, working approach, and short professional narrative |
+| Capabilities | `_data/capabilities.yml` | Three capability pillars, individual claims, publication states, and platform exposure |
+| Legacy draft operations | `_data/operations.yml` | Retained, non-canonical draft material; not linked or rendered publicly |
+| Legacy draft services | `_data/services.yml` | Retained, non-canonical draft material; not linked or rendered publicly |
 | Proof points | `_data/proof.yml` | Approved claims and supporting evidence; currently empty |
 | Credentials | `_data/credentials.yml` | Credentials already stated on the current portfolio |
 | Testimonials | `_data/testimonials.yml` | Approved attributed testimonials; currently empty |
-| Calls to action | `_data/ctas.yml` | Reusable approved CTA records; currently empty |
+| Calls to action | `_data/ctas.yml` | Reusable approved CTA records |
 | Featured references | `_data/featured.yml` | Ordered references to approved featured projects and case studies |
-| Projects | `_projects/*.md` | Portfolio and technical project records |
-| Case studies | `_case_studies/*.md` | Long-form evidence records; currently empty |
+| Projects | `_projects/*.md` | Classified project records with evidence, implementation, data, and outcome disclosures |
+| Case studies | `_case_studies/*.md` | Future long-form evidence records; currently empty |
 
-The homepage remains hand-authored in `index.md` until its later content phase. Reusable records should not be copied back into that file when the homepage is converted; render them through includes instead.
+The homepage is assembled in `index.md` from the canonical profile, homepage, capability, project, credential, and CTA records. Do not duplicate that copy directly in page templates.
 
 ### Publication status
 
@@ -76,7 +76,7 @@ Allowed statuses are:
 - `draft`: working content that must remain private to the source repository.
 - `future`: a planned capability or content area that is not yet a public claim.
 
-The supplied includes render only records whose status is `approved`. Collection output is disabled in `_config.yml`, so project and case-study documents do not automatically receive public URLs. Pages consuming a collection must also filter it to `approved` before rendering.
+The supplied includes render only records whose status is `approved`. Approved project and case-study documents can generate local `/work/<slug>/` URLs. Listing pages and includes must still filter records to `approved` before rendering.
 
 Approval means the wording is permitted on the public portfolio. It does not substitute for evidence. Use `evidence` references to connect a claim to an existing project, case study, credential, or other supported proof.
 
@@ -104,7 +104,14 @@ title: "Project title"
 slug: project-slug
 type: automation
 status: draft
-date: ""
+work_kind: technical-project
+evidence_status: unverified
+verification_status: unverified
+implementation_status: proposed
+data_classification: not-applicable
+outcome_status: unverified
+disclosure: ""
+date_label: ""
 summary: ""
 tools: []
 capability_ids: []
@@ -129,21 +136,28 @@ Create `_case_studies/<slug>.md` with the same publication controls. A case stud
 
 Case-study SEO fields can later provide a page title, meta description, social description, and OG image without requiring a new plugin.
 
+### Evidence and work classification
+
+Work records use controlled `work_kind` values: `professional`, `portfolio-simulation`, `technical-project`, `educational-capstone`, `proposed-system`, and `pending-classification`. Use `pending-classification` only when the work exists but its professional, portfolio, or demonstration classification still requires confirmation.
+
+The shared evidence vocabulary is `verified`, `artifact-supported`, `self-reported`, `unverified`, `synthetic`, and `not-applicable`. Implementation values are `implemented`, `completed-project`, `documented-demonstration`, `simulated`, `proposed`, and `not-applicable`. Data classifications are `professional`, `synthetic`, `mixed`, and `not-applicable`.
+
+Do not mark a work record or credential verified without a reviewable evidence field. Approved work using synthetic data or simulation must carry an explicit public disclosure.
+
 ### Homepage hierarchy
 
-`_data/homepage.yml` records the future order without changing `index.md` in this phase:
+The public homepage follows this order:
 
 1. Hero
-2. Business problems / context
-3. Core capabilities
+2. Problems I Solve
+3. Three capability pillars
 4. Featured work
-5. Operations perspective
-6. Proof / selected outcomes
+5. How I Work
+6. Short professional narrative
 7. Credentials
-8. About
-9. Final CTA
+8. Contact CTA
 
-The record is `draft` and is not consumed publicly yet. When the homepage is rebuilt, each section should render only approved records and should be omitted when its approved collection is empty.
+Each section renders from canonical approved records and should be omitted when its approved collection is empty.
 
 ### Featured content
 
@@ -155,6 +169,7 @@ The semantic, approved-only presentation includes are:
 
 - `_includes/capability-card.html`
 - `_includes/work-card.html`
+- `_includes/work-grid.html`
 - `_includes/proof-card.html`
 - `_includes/service-card.html`
 - `_includes/cta-block.html`
@@ -176,7 +191,7 @@ If Windows PowerShell blocks local scripts under its current execution policy, r
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-site.ps1 -SourceOnly
 ```
 
-This checks required data files, allowed statuses, duplicate capability IDs and collection slugs, capability and evidence references, featured references, disabled collection output, and approved-only rendering guards.
+This checks required data files, controlled statuses, duplicate capability IDs and work slugs, capability and evidence references, featured references, collection routing, work disclosures, credential evidence rules, canonical naming, navigation, incomplete reserved dates, and approved-only rendering guards.
 
 After Jekyll builds `_site`, run the complete route and local-link validation:
 

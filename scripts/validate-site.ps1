@@ -23,8 +23,8 @@ if (-not (Test-Path -LiteralPath $siteRoot -PathType Container)) {
 $requiredRoutes = @(
     "index.html",
     "work\index.html",
-    "operations\index.html",
-    "services\index.html"
+    "about\index.html",
+    "contact\index.html"
 )
 
 $failures = [System.Collections.Generic.List[string]]::new()

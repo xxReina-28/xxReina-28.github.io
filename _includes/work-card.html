@@ -1,28 +1,25 @@
 {% assign item = include.item %}
 {% if item.status == 'approved' %}
+  {% assign kind_label = item.work_kind | replace: '-', ' ' | capitalize %}
   <article class="card project-card" data-work-id="{{ item.slug }}">
-    <h3>{{ item.title }}</h3>
-    {% if item.summary %}
-      <p class="muted">{{ item.summary }}</p>
-    {% endif %}
-
+    <p class="eyebrow">{{ kind_label }}</p>
+    <h3><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+    {% if item.summary %}<p class="muted">{{ item.summary }}</p>{% endif %}
+    {% if item.disclosure %}<p class="work-disclosure">{{ item.disclosure }}</p>{% endif %}
+    <ul class="status-labels" aria-label="Evidence and implementation status">
+      <li class="status-label">Evidence: {{ item.evidence_status | replace: '-', ' ' }}</li>
+      <li class="status-label">Implementation: {{ item.implementation_status | replace: '-', ' ' }}</li>
+    </ul>
     {% if item.tools and item.tools.size > 0 %}
       <ul class="badges" aria-label="Tools and methods">
-        {% for tool in item.tools %}
-          <li class="badge">{{ tool }}</li>
-        {% endfor %}
+        {% for tool in item.tools %}<li class="badge">{{ tool }}</li>{% endfor %}
       </ul>
     {% endif %}
-
-    {% if item.external_url or item.repository_url %}
-      <div class="btn-row">
-        {% if item.external_url %}
-          <a class="btn" href="{{ item.external_url }}" target="_blank" rel="noopener">View project</a>
-        {% endif %}
-        {% if item.repository_url %}
-          <a class="btn{% if item.external_url %} btn-ghost{% endif %}" href="{{ item.repository_url }}" target="_blank" rel="noopener">View Repo</a>
-        {% endif %}
-      </div>
-    {% endif %}
+    <div class="btn-row">
+      <a class="btn" href="{{ item.url | relative_url }}">View details</a>
+      {% if item.repository_url %}
+        <a class="btn btn-ghost" href="{{ item.repository_url }}" target="_blank" rel="noopener">View repository</a>
+      {% endif %}
+    </div>
   </article>
 {% endif %}
