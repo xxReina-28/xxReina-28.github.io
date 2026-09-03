@@ -485,6 +485,11 @@ if ($config -notmatch '(?ms)case_studies:\s*\r?\n\s+output:\s+true\s*\r?\n\s+per
 if ($config -notmatch '(?ms)projects:\s*\r?\n\s+output:\s+true\s*\r?\n\s+permalink:\s*/work/:slug/') {
     $failures.Add("Project collection must output at /work/:slug/")
 }
+foreach ($excludedPath in @("astro-site", "README.md", "structure", "scripts", ".github", "Gemfile", "Gemfile.lock", "vendor")) {
+    if ($config -notmatch ('(?m)^\s*-\s*' + [regex]::Escape($excludedPath) + '\s*$')) {
+        $failures.Add("Jekyll exclusion is missing: $excludedPath")
+    }
+}
 
 $styleContent = Get-Content -LiteralPath (Join-Path $sourceRoot "assets\css\style.scss") -Raw -Encoding utf8
 foreach ($designToken in @(

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-# The production sitemap and indexing policy will be finalized at cutover.

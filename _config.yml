@@ -14,6 +14,16 @@ theme: jekyll-theme-cayman
 plugins:
   - jekyll-seo-tag
 
+exclude:
+  - astro-site
+  - README.md
+  - structure
+  - scripts
+  - .github
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
 collections:
   case_studies:
     output: true
