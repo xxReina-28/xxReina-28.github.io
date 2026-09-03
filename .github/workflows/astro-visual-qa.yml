@@ -22,7 +22,6 @@ jobs:
         working-directory: astro-site
     env:
       ASTRO_TELEMETRY_DISABLED: "1"
-      QA_OUTPUT_DIR: ${{ runner.temp }}\astro-visual-qa
 
     steps:
       - name: Check out migration source
