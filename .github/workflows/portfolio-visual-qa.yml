@@ -41,9 +41,16 @@ jobs:
         run: |
           $ErrorActionPreference = "Stop"
           $env:JEKYLL_ENV = "production"
-          bundle exec jekyll build --trace
-          if ($LASTEXITCODE -ne 0) {
-            throw "Production Jekyll build failed with exit code $LASTEXITCODE."
+          $buildLog = Join-Path $env:RUNNER_TEMP "jekyll-build.log"
+          bundle exec jekyll build --trace 2>&1 | Tee-Object -FilePath $buildLog
+          $buildExitCode = $LASTEXITCODE
+          if ($buildExitCode -ne 0) {
+            $annotation = (Get-Content -LiteralPath $buildLog -Raw) `
+              -replace '%', '%25' `
+              -replace "`r", '%0D' `
+              -replace "`n", '%0A'
+            Write-Output "::error title=Production Jekyll build failed::$annotation"
+            exit $buildExitCode
           }
 
       - name: Validate generated routes and assets
@@ -81,8 +88,9 @@ jobs:
         with:
           name: portfolio-visual-qa-evidence
           path: |
-            ${{ env.QA_OUTPUT_DIR }}\screenshots
-            ${{ env.QA_OUTPUT_DIR }}\portfolio-visual-qa-report.json
-            ${{ env.QA_OUTPUT_DIR }}\portfolio-visual-qa-report.md
+            ${{ runner.temp }}\portfolio-visual-qa\screenshots
+            ${{ runner.temp }}\portfolio-visual-qa\portfolio-visual-qa-report.json
+            ${{ runner.temp }}\portfolio-visual-qa\portfolio-visual-qa-report.md
+            ${{ runner.temp }}\jekyll-build.log
           retention-days: 7
           if-no-files-found: warn
