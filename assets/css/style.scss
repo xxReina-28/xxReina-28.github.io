@@ -533,6 +533,21 @@ details.cred-details{ margin-top: 0.25rem; }
   .status-list{ grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Work collection structure */
+.work-group + .work-group{
+  margin-top: 3.5rem;
+}
+
+.work-group-heading{
+  max-width: 760px;
+  margin-bottom: 1.25rem;
+}
+
+.work-detail > section,
+.work-detail > .btn-row{
+  margin-top: 2rem;
+}
+
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
 

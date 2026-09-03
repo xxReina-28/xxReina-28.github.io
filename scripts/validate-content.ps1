@@ -156,6 +156,7 @@ $proofIds = @([regex]::Matches($proofContent, '(?m)^\s*- id:\s*["'']?([^"''\s]+)
 $projectRecords = @{}
 $caseStudyRecords = @{}
 $collectionSlugs = [System.Collections.Generic.List[string]]::new()
+$caseStudyArtifacts = [System.Collections.Generic.List[string]]::new()
 
 foreach ($collection in @("projects", "case_studies")) {
     $directory = Join-Path $sourceRoot "_$collection"
@@ -177,6 +178,8 @@ foreach ($collection in @("projects", "case_studies")) {
         $dataClassification = Get-ScalarValue -Content $frontMatter -Key "data_classification"
         $outcomeStatus = Get-ScalarValue -Content $frontMatter -Key "outcome_status"
         $disclosure = Get-ScalarValue -Content $frontMatter -Key "disclosure"
+        $artifactUrl = Get-ScalarValue -Content $frontMatter -Key "artifact_url"
+        $artifactLabel = Get-ScalarValue -Content $frontMatter -Key "artifact_label"
         if ([string]::IsNullOrWhiteSpace($slug)) {
             $failures.Add("Collection document has no slug: $($file.Name)")
             continue
@@ -216,6 +219,35 @@ foreach ($collection in @("projects", "case_studies")) {
         if ($frontMatter -match '(?m)^date:\s*["'']?\d{4}-\d{2}["'']?\s*$') {
             $failures.Add("Collection document uses an incomplete reserved Jekyll date: $($file.Name)")
         }
+        if ($collection -eq "case_studies" -and $status -eq "approved") {
+            $rawDocument = Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8
+            $body = [regex]::Replace($rawDocument, '(?s)^---\s*.*?\s*---\s*', '')
+            if ([string]::IsNullOrWhiteSpace((Get-ScalarValue -Content $frontMatter -Key "summary")) -or
+                [string]::IsNullOrWhiteSpace($body)) {
+                $failures.Add("Published case study is empty or missing its summary: $($file.Name)")
+            }
+            if ([string]::IsNullOrWhiteSpace($artifactUrl) -or $artifactUrl -notmatch '^/assets/case-studies/[^/]+\.pdf$') {
+                $failures.Add("Published case study has a missing or invalid artifact_url: $($file.Name)")
+            } else {
+                $artifactPath = Join-Path $sourceRoot $artifactUrl.TrimStart('/')
+                if (-not (Test-Path -LiteralPath $artifactPath -PathType Leaf)) {
+                    $failures.Add("Published case study PDF does not exist: $artifactUrl")
+                }
+                $caseStudyArtifacts.Add($artifactUrl)
+            }
+            if ([string]::IsNullOrWhiteSpace($artifactLabel) -or $artifactLabel -notmatch '(?i)PDF') {
+                $failures.Add("Published case study needs a descriptive PDF artifact_label: $($file.Name)")
+            }
+            if ($workKind -eq "portfolio-simulation" -and $outcomeStatus -notin @("synthetic", "not-applicable")) {
+                $failures.Add("Portfolio simulation has an outcome status that could imply realized results: $($file.Name)")
+            }
+            if ($body -match '\d+(?:\.\d+)?\s*%') {
+                $failures.Add("Published case-study summary contains a percentage metric requiring evidence review: $($file.Name)")
+            }
+            if ($body -match '(?i)\b(?:achieved|resulted in|reduced by|increased by|saved)\b') {
+                $failures.Add("Published simulation may state an outcome as realized: $($file.Name)")
+            }
+        }
         $collectionSlugs.Add($slug)
 
         $record = @{ Status = $status; Title = $title; Path = $file.FullName }
@@ -235,6 +267,17 @@ foreach ($collection in @("projects", "case_studies")) {
 
 foreach ($duplicate in @($collectionSlugs | Group-Object | Where-Object Count -gt 1)) {
     $failures.Add("Duplicate collection slug: $($duplicate.Name)")
+}
+
+foreach ($duplicate in @($caseStudyArtifacts | Group-Object | Where-Object Count -gt 1)) {
+    $failures.Add("Case-study PDF is associated with multiple canonical records: $($duplicate.Name)")
+}
+$caseStudyPdfDirectory = Join-Path $sourceRoot "assets\case-studies"
+foreach ($pdf in Get-ChildItem -LiteralPath $caseStudyPdfDirectory -Filter "*.pdf" -File) {
+    $publicPath = "/assets/case-studies/$($pdf.Name)"
+    if (@($caseStudyArtifacts | Where-Object { $_ -eq $publicPath }).Count -ne 1) {
+        $failures.Add("Case-study PDF must be associated with exactly one approved canonical record: $publicPath")
+    }
 }
 
 foreach ($evidenceMatch in [regex]::Matches($capabilitiesContent, '(?ms)^\s*- type:\s*([^\s]+)\s*\r?\n\s+id:\s*([^\s]+)\s*$')) {
@@ -309,11 +352,11 @@ foreach ($relativePath in $publicationGuards) {
 }
 
 $workPage = Get-Content -LiteralPath (Join-Path $sourceRoot "work\index.md") -Raw -Encoding utf8
-$workGrid = Get-Content -LiteralPath (Join-Path $sourceRoot "_includes\work-grid.html") -Raw -Encoding utf8
-if ($workPage -notmatch 'include\s+work-grid\.html' -or
-    $workGrid -notmatch "site\.projects\s*\|\s*where:\s*'status',\s*'approved'" -or
-    $workGrid -notmatch "site\.case_studies\s*\|\s*where:\s*'status',\s*'approved'") {
-    $failures.Add("Work page and grid must filter projects and case studies to approved status")
+$groupedWork = Get-Content -LiteralPath (Join-Path $sourceRoot "_includes\grouped-work.html") -Raw -Encoding utf8
+if ($workPage -notmatch 'include\s+grouped-work\.html' -or
+    $groupedWork -notmatch "site\.projects\s*\|\s*where:\s*'status',\s*'approved'" -or
+    $groupedWork -notmatch "site\.case_studies\s*\|\s*where:\s*'status',\s*'approved'") {
+    $failures.Add("Work page and grouped work include must filter projects and case studies to approved status")
 }
 
 $navigationContent = Get-Content -LiteralPath (Join-Path $sourceRoot "_data\navigation.yml") -Raw -Encoding utf8

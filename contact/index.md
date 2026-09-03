@@ -13,5 +13,5 @@ permalink: /contact/
   <li><a href="{{ profile.contact.linkedin }}" target="_blank" rel="noopener">LinkedIn</a></li>
   <li><a href="{{ profile.contact.email }}">Email Nina</a></li>
   <li><a href="{{ profile.contact.github }}" target="_blank" rel="noopener">GitHub</a></li>
-  <li><a href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">Résumé</a></li>
+  <li><a href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a></li>
 </ul>

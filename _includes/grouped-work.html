@@ -1,0 +1,30 @@
+{% assign approved_case_studies = site.case_studies | where: 'status', 'approved' | sort: 'flagship_order' %}
+{% assign approved_projects = site.projects | where: 'status', 'approved' %}
+
+{% if approved_case_studies.size > 0 %}
+  <section class="work-group" aria-labelledby="flagship-work-heading">
+    <div class="work-group-heading">
+      <p class="eyebrow">Portfolio simulations</p>
+      <h2 id="flagship-work-heading">Flagship Case Studies</h2>
+      <p>Executive summaries of synthetic scenarios, with the full supporting artifacts available as PDFs.</p>
+    </div>
+    <div class="project-grid">
+      {% for item in approved_case_studies %}
+        {% include work-card.html item=item %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% if approved_projects.size > 0 %}
+  <section class="work-group" aria-labelledby="supporting-work-heading">
+    <div class="work-group-heading">
+      <h2 id="supporting-work-heading">Supporting Projects</h2>
+    </div>
+    <div class="project-grid">
+      {% for item in approved_projects %}
+        {% include work-card.html item=item %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

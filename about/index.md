@@ -47,4 +47,5 @@ permalink: /about/
       {% include credential-item.html credential=credential %}
     {% endfor %}
   </ul>
+  <p><a class="btn btn-ghost" href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a></p>
 </section>

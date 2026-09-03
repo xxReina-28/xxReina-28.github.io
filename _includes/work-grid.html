@@ -1,6 +1,10 @@
 {% assign approved_projects = site.projects | where: 'status', 'approved' %}
-{% assign approved_case_studies = site.case_studies | where: 'status', 'approved' %}
-{% assign approved_work = approved_projects | concat: approved_case_studies %}
+{% assign approved_case_studies = site.case_studies | where: 'status', 'approved' | sort: 'flagship_order' %}
+{% if include.case_studies_only %}
+  {% assign approved_work = approved_case_studies %}
+{% else %}
+  {% assign approved_work = approved_projects | concat: approved_case_studies %}
+{% endif %}
 {% if include.featured_only %}
   {% assign approved_work = approved_work | where: 'featured', true %}
 {% endif %}

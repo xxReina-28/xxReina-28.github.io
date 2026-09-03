@@ -16,6 +16,7 @@ layout: default
       <div class="btn-row">
         <a class="btn" href="{{ '/work/' | relative_url }}">View selected work</a>
         <a class="btn btn-ghost" href="{{ '/contact/' | relative_url }}">Contact Nina</a>
+        <a class="btn btn-ghost" href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a>
       </div>
     </div>
   </div>
@@ -42,7 +43,7 @@ layout: default
     <h2 id="work-heading" class="section-title">Selected Work</h2>
     <a href="{{ '/work/' | relative_url }}">View all work</a>
   </div>
-  {% include work-grid.html featured_only=true %}
+  {% include work-grid.html featured_only=true case_studies_only=true %}
 </section>
 
 <section class="section" aria-labelledby="approach-heading">

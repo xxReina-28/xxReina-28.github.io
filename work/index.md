@@ -5,4 +5,4 @@ description: "Selected systems and technical projects, with clear disclosure of 
 permalink: /work/
 ---
 
-{% include work-grid.html %}
+{% include grouped-work.html %}

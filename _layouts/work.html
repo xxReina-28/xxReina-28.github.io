@@ -32,9 +32,26 @@ layout: default
 
   {{ content }}
 
-  {% if page.repository_url %}
+  {% if page.capability_ids and page.capability_ids.size > 0 %}
+    <section aria-labelledby="related-capabilities-heading">
+      <h2 id="related-capabilities-heading">Related capabilities</h2>
+      <ul>
+        {% for capability_id in page.capability_ids %}
+          {% assign capability = site.data.capabilities | where: 'id', capability_id | first %}
+          {% if capability %}<li>{{ capability.title }}</li>{% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if page.artifact_url or page.repository_url %}
     <div class="btn-row">
-      <a class="btn" href="{{ page.repository_url }}" target="_blank" rel="noopener">View repository</a>
+      {% if page.artifact_url %}
+        <a class="btn" href="{{ page.artifact_url | relative_url }}" target="_blank" rel="noopener">{{ page.artifact_label }}</a>
+      {% endif %}
+      {% if page.repository_url %}
+        <a class="btn" href="{{ page.repository_url }}" target="_blank" rel="noopener">View repository</a>
+      {% endif %}
       <a class="btn btn-ghost" href="{{ '/work/' | relative_url }}">Back to work</a>
     </div>
   {% endif %}

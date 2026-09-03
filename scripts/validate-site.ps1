@@ -24,7 +24,11 @@ $requiredRoutes = @(
     "index.html",
     "work\index.html",
     "about\index.html",
-    "contact\index.html"
+    "contact\index.html",
+    "work\business-operations-diagnostic-process-redesign\index.html",
+    "work\revenue-operations-sales-performance-system\index.html",
+    "work\strategic-procurement-supplier-decision-system\index.html",
+    "work\project-delivery-recovery-scrum-operating-system\index.html"
 )
 
 $failures = [System.Collections.Generic.List[string]]::new()

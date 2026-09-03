@@ -1,4 +1,8 @@
 projects:
   - employee-of-the-month-automation
   - pipeline-strategist-agent
-case_studies: []
+case_studies:
+  - business-operations-diagnostic-process-redesign
+  - revenue-operations-sales-performance-system
+  - strategic-procurement-supplier-decision-system
+  - project-delivery-recovery-scrum-operating-system
