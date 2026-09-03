@@ -1,0 +1,12 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+interface Props { title?: string; description?: string }
+const siteTitle = 'Nina Suico | Business Operations & Systems Analyst';
+const defaultDescription = 'Business operations and systems portfolio focused on workflow design, sales and client operations, project delivery, reporting, and decision support across Southeast Asia/APAC.';
+const { title, description = defaultDescription } = Astro.props;
+const documentTitle = title ? `${title} | Nina Suico` : siteTitle;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#18192f"/><title>{documentTitle}</title><meta name="description" content={description}/><meta name="author" content="Nina Suico"/><link rel="canonical" href={canonical}/><meta property="og:type" content="website"/><meta property="og:title" content={documentTitle}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><link rel="icon" type="image/svg+xml" href="/assets/img/ns-mark.svg"/><link rel="alternate icon" type="image/png" href="/assets/img/favicon.png"/></head><body><a class="skip-to-content" href="#main-content">Skip to main content</a><SiteHeader/><main id="main-content" class="main-content" tabindex="-1"><slot/></main><SiteFooter/></body></html>

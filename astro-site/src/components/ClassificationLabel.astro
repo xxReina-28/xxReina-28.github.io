@@ -1,0 +1,6 @@
+---
+interface Props { kind: string }
+const { kind } = Astro.props;
+const label = kind.split('-').map((word) => word[0]?.toUpperCase() + word.slice(1)).join(' ');
+---
+<span class="classification-label">{label}</span>

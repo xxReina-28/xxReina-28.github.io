@@ -1,0 +1,11 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { profile } from '../data';
+const contacts: Array<{ name: string; copy: string; url: string; label: string }> = [
+  { name: 'LinkedIn', copy: 'Professional profile and direct messages.', url: profile.contact.linkedin, label: 'Open LinkedIn profile' },
+  { name: 'Email', copy: 'Full-time, consulting, and project enquiries.', url: profile.contact.email, label: 'Email Nina' },
+  { name: 'GitHub', copy: 'Technical projects and repository history.', url: profile.contact.github, label: 'Open GitHub profile' },
+  { name: 'Résumé', copy: 'Public professional résumé in PDF format.', url: profile.contact.resume, label: 'View résumé (PDF)' },
+];
+---
+<PageLayout title="Contact" description="Contact Nina Suico about full-time opportunities or selective consulting and project work."><div class="contact-intro"><p class="lead">I am open to full-time opportunities across Southeast Asia/APAC and selective consulting or project work.</p><p>{profile.location_label} · {profile.mobility_label} · {profile.availability_label}</p></div><ul class="contact-list">{contacts.map(({ name, copy, url, label }, index) => <li class="glass-surface"><span class="contact-index" aria-hidden="true">0{index + 1}</span><strong>{name}</strong><p>{copy}</p><a class="text-link" href={url} target={url.startsWith('http') || url.endsWith('.pdf') ? '_blank' : undefined} rel={url.startsWith('http') || url.endsWith('.pdf') ? 'noopener' : undefined}>{label}</a></li>)}</ul></PageLayout>

@@ -1,0 +1,19 @@
+status: approved
+problems_heading: "Problems I Solve"
+problems:
+  - "Workflows that depend on memory instead of documented process"
+  - "Sales and delivery teams working from disconnected information"
+  - "CRM records that do not support reliable follow-up or reporting"
+  - "Projects slowed by unclear ownership, handoffs, or decision rights"
+  - "Operational reporting that describes activity but does not guide action"
+  - "Procurement or supplier decisions made without consistent evaluation criteria"
+how_i_work_heading: "How I Work"
+how_i_work:
+  - title: "Understand the operating reality"
+    description: "Map the workflow, information, constraints, and decisions before selecting a solution."
+  - title: "Design for clear execution"
+    description: "Define ownership, handoffs, controls, and useful reporting around the work."
+  - title: "Keep evidence separate from assumptions"
+    description: "Document what is implemented, demonstrated, simulated, or still proposed."
+about_heading: "Operations work that connects the system"
+about_summary: "My foundation spans frontline service, administrative execution, recruitment, sales, procurement, CRM workflows, project coordination, and client services. That cross-functional context shapes how I design practical operating and decision systems."

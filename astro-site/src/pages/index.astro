@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SystemsMap from '../components/SystemsMap.astro';
+import CapabilityCard from '../components/CapabilityCard.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import CredentialCard from '../components/CredentialCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { capabilities, credentials, ctas, homepage, profile } from '../data';
+const caseStudies = (await getCollection('caseStudies')).sort((a, b) => (a.data.flagship_order ?? 99) - (b.data.flagship_order ?? 99));
+const contactCta = ctas.items.find((item) => item.id === 'contact')!;
+---
+<BaseLayout><section class="section hero-section" aria-labelledby="hero-heading"><div class="hero-layout"><div class="hero-copy"><div class="hero-identity"><img src="/assets/img/profile.jpg" alt="Portrait of Nina Suico" class="avatar" width="72" height="72"/><p><strong>{profile.name}</strong><span>{profile.role}</span></p></div><p class="eyebrow">{profile.role}</p><h1 id="hero-heading">{profile.value_proposition}</h1><p class="lead">{profile.supporting_statement}</p><p>{profile.market_context}</p><p class="muted">{profile.location_label} · {profile.mobility_label} · {profile.availability_label}</p><div class="btn-row"><a class="btn" href="/work/">View selected work</a><a class="btn btn-ghost" href={profile.contact.resume} target="_blank" rel="noopener">View résumé (PDF)</a></div></div><SystemsMap/></div></section>
+<section class="section" aria-labelledby="problems-heading"><div class="section-intro"><p class="eyebrow">01 · Diagnose</p><h2 id="problems-heading" class="section-title">{homepage.problems_heading}</h2></div><ul class="problem-grid">{homepage.problems.map((problem, index) => <li class="problem-module glass-surface"><span aria-hidden="true">0{index + 1}</span><p>{problem}</p></li>)}</ul></section>
+<section class="section" aria-labelledby="capabilities-heading"><div class="section-intro"><p class="eyebrow">02 · Structure</p><h2 id="capabilities-heading" class="section-title">Three Capability Pillars</h2></div><div class="grid grid-3">{capabilities.map((capability, index) => <CapabilityCard capability={capability} index={index + 1}/>)}</div></section>
+<section class="section" aria-labelledby="work-heading"><div class="section-heading-row"><div class="section-intro"><p class="eyebrow">03 · Evidence</p><h2 id="work-heading" class="section-title">Selected Work</h2></div><a class="text-link" href="/work/">View all work</a></div><WorkGrid items={caseStudies}/></section>
+<section class="section" aria-labelledby="approach-heading"><div class="section-intro"><p class="eyebrow">04 · Method</p><h2 id="approach-heading" class="section-title">{homepage.how_i_work_heading}</h2></div><ol class="method-sequence">{homepage.how_i_work.map((item, index) => <li class="method-step glass-surface"><span class="method-index" aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.description}</p></li>)}</ol></section>
+<section class="section" aria-labelledby="about-heading"><div class="narrative-panel glass-surface"><p class="eyebrow">05 · Context</p><h2 id="about-heading">{homepage.about_heading}</h2><p>{homepage.about_summary}</p><a class="text-link" href="/about/">Read the professional narrative</a></div></section>
+<section class="section" aria-labelledby="credentials-heading"><div class="section-intro"><p class="eyebrow">06 · Development</p><h2 id="credentials-heading" class="section-title">Credentials</h2></div><ul class="credential-list credential-grid">{credentials.map((credential) => <CredentialCard credential={credential}/>)}</ul></section><CTASection heading={contactCta.heading} body={contactCta.body} label={contactCta.label} url={contactCta.url}/></BaseLayout>

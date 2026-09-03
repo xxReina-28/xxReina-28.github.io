@@ -1,0 +1,12 @@
+---
+import type { Capability } from '../data';
+import CapabilityMark from './CapabilityMark.astro';
+interface Props { capability: Capability; index: number; basisOnly?: boolean }
+const { capability, index, basisOnly = false } = Astro.props;
+---
+<article class:list={['card glass-surface capability-card', `capability-card--${capability.id}`, { 'capability-basis': basisOnly }]}>
+  {!basisOnly && <div class="capability-card__header"><span class="capability-index" aria-hidden="true">0{index}</span><CapabilityMark id={capability.id}/></div>}
+  <h3>{capability.title}</h3><p class="capability-summary">{capability.career_basis}</p>
+  {!basisOnly && <ul>{capability.claims.map((claim) => <li>{claim.label}</li>)}</ul>}
+  {!basisOnly && capability.platforms && <p class="muted capability-platforms"><strong>Platform exposure:</strong> {capability.platforms.join(', ')}</p>}
+</article>

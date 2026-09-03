@@ -1,0 +1,7 @@
+---
+import type { CareerRole as CareerRoleType } from '../data';
+import { capabilities } from '../data';
+interface Props { role: CareerRoleType }
+const { role } = Astro.props;
+---
+<article class="career-role" data-evidence-status={role.evidence_status}><header><p class="career-role-dates">{role.start_label} to {role.end_label}</p><h3>{role.actual_title}</h3><p class="career-role-organization">{role.organization}{role.engagement_type && ` · ${role.engagement_type}`}</p>{role.employment_context && <p><strong>Contexts:</strong> {role.employment_context}</p>}{role.functional_descriptor && <p class="career-functional">Functional focus: {role.functional_descriptor}</p>}{role.concurrent_note && <p class="career-concurrent"><strong>Concurrent work:</strong> {role.concurrent_note}</p>}</header><p>{role.scope}</p><ul>{role.bullets.map((bullet) => <li>{bullet}</li>)}</ul><ul class="status-labels" aria-label="Capability and evidence labels"><li class="status-label">Evidence: {role.evidence_status.replaceAll('-', ' ')}</li>{role.capability_ids.map((id) => <li class="status-label">{capabilities.find((capability) => capability.id === id)?.title}</li>)}</ul></article>

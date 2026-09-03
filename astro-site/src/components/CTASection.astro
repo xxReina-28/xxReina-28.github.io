@@ -1,0 +1,5 @@
+---
+interface Props { heading: string; body: string; label: string; url: string }
+const { heading, body, label, url } = Astro.props;
+---
+<aside class="card glass-surface cta-block" aria-labelledby="contact-cta"><h2 id="contact-cta">{heading}</h2><p>{body}</p><div class="btn-row"><a class="btn" href={url}>{label}</a></div></aside>

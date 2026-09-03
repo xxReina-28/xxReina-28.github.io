@@ -1,0 +1,78 @@
+- id: operating-systems
+  title: "Operating Systems"
+  status: approved
+  evidence_status: self-reported
+  career_basis: "Frontline service, order controls, executive support, customer operations, project coordination, and client-service delivery developed a practical view of ownership, handoffs, and operating controls."
+  claims:
+    - id: workflow-process-design
+      label: "Workflow and process design"
+      status: approved
+    - id: sops-operating-controls
+      label: "SOPs and operating controls"
+      status: approved
+    - id: project-delivery-coordination
+      label: "Project delivery coordination"
+      status: approved
+    - id: cross-functional-handoffs
+      label: "Cross-functional handoffs"
+      status: approved
+    - id: client-service-operations
+      label: "Client and service operations"
+      status: approved
+    - id: continuous-improvement
+      label: "Continuous improvement"
+      status: approved
+
+- id: revenue-client-systems
+  title: "Revenue & Client Systems"
+  status: approved
+  evidence_status: self-reported
+  career_basis: "Sales administration, qualification, account coordination, CRM enablement, recruitment, campaigns, and sales-to-delivery work connect commercial activity with usable client operations."
+  platforms:
+    - Salesforce
+    - HubSpot
+    - Zoho
+  claims:
+    - id: sales-operations
+      label: "Sales operations"
+      status: approved
+    - id: crm-enablement-governance
+      label: "CRM enablement and governance"
+      status: approved
+    - id: pipeline-qualification-workflows
+      label: "Pipeline and qualification workflows"
+      status: approved
+    - id: client-lifecycle-operations
+      label: "Client lifecycle operations"
+      status: approved
+    - id: commercial-coordination
+      label: "Commercial coordination"
+      status: approved
+    - id: sales-delivery-handoffs
+      label: "Sales-to-delivery handoffs"
+      status: approved
+
+- id: decision-systems
+  title: "Decision Systems"
+  status: approved
+  evidence_status: self-reported
+  career_basis: "Operational records, compliance logs, supplier comparisons, reporting structures, workflow testing, and management visibility requirements support evidence-aware decisions."
+  claims:
+    - id: operational-reporting
+      label: "Operational reporting"
+      status: approved
+    - id: kpi-design-monitoring
+      label: "KPI design and monitoring"
+      status: approved
+    - id: dashboard-requirements
+      label: "Dashboard requirements"
+      status: approved
+    - id: decision-frameworks
+      label: "Decision frameworks"
+      status: approved
+    - id: data-supported-prioritization
+      label: "Data-supported prioritization"
+      status: approved
+    - id: procurement-supplier-evaluation
+      label: "Procurement and supplier evaluation"
+      status: approved

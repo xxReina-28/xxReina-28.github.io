@@ -1,0 +1,6 @@
+---
+interface Props { disclosure: string; workKind: string; evidenceStatus: string; implementationStatus: string; dataClassification: string; outcomeStatus: string }
+const { disclosure, workKind, evidenceStatus, implementationStatus, dataClassification, outcomeStatus } = Astro.props;
+const display = (value: string) => value.replaceAll('-', ' ');
+---
+<aside class="disclosure-panel glass-surface" aria-label="Project evidence and implementation disclosure"><p class="eyebrow">Evidence record</p><h2>Project disclosure</h2><p>{disclosure}</p><dl class="status-list"><div><dt>Classification</dt><dd>{display(workKind)}</dd></div><div><dt>Evidence</dt><dd>{display(evidenceStatus)}</dd></div><div><dt>Implementation</dt><dd>{display(implementationStatus)}</dd></div><div><dt>Data</dt><dd>{display(dataClassification)}</dd></div><div><dt>Outcomes</dt><dd>{display(outcomeStatus)}</dd></div></dl></aside>

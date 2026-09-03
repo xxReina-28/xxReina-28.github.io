@@ -1,0 +1,289 @@
+status: approved
+name: "Nina Suico"
+role: "Business Operations & Systems Analyst"
+value_proposition: "I fix the gaps between Sales, Operations, and Client Delivery."
+supporting_statement: "I turn fragmented workflows, unclear handoffs, and disconnected operational data into practical systems teams can use and leaders can act on."
+location_label: "Kuala Lumpur, Malaysia"
+mobility_label: "Mobile across Southeast Asia"
+availability_label: "Open to remote and relocation opportunities"
+market_context: "Growing and operationally complex companies across Southeast Asia/APAC."
+markets:
+  - Singapore
+  - Malaysia
+  - Philippines
+  - Thailand
+  - Vietnam
+  - Indonesia
+professional_narrative:
+  - "My career began close to the work itself: resolving customer and billing concerns, troubleshooting service issues, auditing orders, maintaining operational records, and supporting executives through time-sensitive priorities. Those roles taught me how small gaps in information, ownership, and follow-through affect both customers and delivery teams."
+  - "I later applied that operating context across recruitment, customer operations, sales, procurement, CRM workflows, project coordination, and client services. The throughline is practical systems work: understanding how work moves across functions, making handoffs clearer, and building structures that help teams execute and leaders make decisions."
+career_stages:
+  - id: frontline-foundations
+    title: "Frontline and operational foundations"
+    summary: "Customer contact, technical troubleshooting, order controls, logistics coordination, and accurate operational records."
+    expanded: true
+  - id: administrative-coordination
+    title: "Administrative and coordination depth"
+    summary: "Executive and personal support requiring discretion, organization, and reliable follow-through."
+    expanded: false
+  - id: customer-recruitment-sales
+    title: "Customer operations, recruitment, and commercial exposure"
+    summary: "Customer escalation, cross-border recruitment, regulated operations, and commercial context."
+    expanded: false
+  - id: revenue-procurement-delivery
+    title: "Revenue, procurement, and project systems"
+    summary: "Requirements, CRM and service records, supplier coordination, workflow testing, and proposed sales-system design."
+    expanded: true
+  - id: client-services-operating-design
+    title: "Client services and cross-functional operating design"
+    summary: "Current work connecting client delivery, CRM enablement, partnerships, and special-project execution."
+    expanded: true
+career_progression:
+  - id: canadian-telecommunications-account
+    stage_id: frontline-foundations
+    organization: "Canadian Telecommunications Account"
+    actual_title: "Customer Service, Billing & Technical Support Representative"
+    start_label: "August 2016"
+    end_label: "January 2017"
+    sort_start_year: 2016
+    sort_start_month: 8
+    sort_end_year: 2017
+    sort_end_month: 1
+    display_priority: 1
+    evidence_status: self-reported
+    scope: "Inbound customer service and billing support followed by technical troubleshooting."
+    bullets:
+      - "Handled inbound billing and customer-service concerns."
+      - "Moved into technical support after learning the account systems and troubleshooting procedures."
+    capability_ids:
+      - operating-systems
+
+  - id: eo-business-process-outsourcing
+    stage_id: frontline-foundations
+    organization: "EO Business Process Outsourcing"
+    actual_title: "Order Desk Auditor & Data Entry Officer"
+    start_label: "April 2017"
+    end_label: "September 2017"
+    sort_start_year: 2017
+    sort_start_month: 4
+    sort_end_year: 2017
+    sort_end_month: 9
+    display_priority: 2
+    evidence_status: self-reported
+    scope: "Order auditing, discrepancy resolution, returns and logistics compliance, and high-volume data entry."
+    bullets:
+      - "Audited tire orders and resolved discrepancies with store managers."
+      - "Supported returns and logistics compliance while maintaining high-volume order data."
+    capability_ids:
+      - operating-systems
+      - decision-systems
+
+  - id: executive-assistant-personal-assistant
+    stage_id: administrative-coordination
+    organization: "Various Employers"
+    actual_title: "Executive Assistant & Personal Assistant"
+    start_label: "December 2017"
+    end_label: "May 2019"
+    sort_start_year: 2017
+    sort_start_month: 12
+    sort_end_year: 2019
+    sort_end_month: 5
+    display_priority: 3
+    evidence_status: self-reported
+    employment_context: "Private business principal, diplomatic principals, and Neuto Entertainment"
+    scope: "Executive, administrative, and personal support across confidential and time-sensitive priorities."
+    bullets:
+      - "Supported calendars, travel, correspondence, confidential documentation, and business priorities."
+      - "Coordinated meetings, follow-ups, stakeholder communication, and administrative or sales-support requirements."
+      - "Converted loosely defined requests into organized actions and completed deliverables."
+    capability_ids:
+      - operating-systems
+
+  - id: blitz
+    stage_id: customer-recruitment-sales
+    organization: "Blitz Inc"
+    actual_title: "OTC Operations & Risk Support"
+    start_label: "June 2019"
+    end_label: "July 2022"
+    sort_start_year: 2019
+    sort_start_month: 6
+    sort_end_year: 2022
+    sort_end_month: 7
+    display_priority: 4
+    evidence_status: self-reported
+    scope: "OTC cryptocurrency operations, documentation, research, record maintenance, and internal control checks."
+    bullets:
+      - "Supported market and counterparty research, transaction documentation, and operational records."
+      - "Maintained compliance-related logs used for transaction review and operational decision-making."
+    capability_ids:
+      - operating-systems
+      - decision-systems
+
+  - id: shang-li-information-technology
+    stage_id: customer-recruitment-sales
+    organization: "Shang-li Information Technology Co. Ltd."
+    actual_title: "Recruitment Operations Specialist"
+    engagement_type: "Contract"
+    start_label: "November 2019"
+    end_label: "May 2020"
+    sort_start_year: 2019
+    sort_start_month: 11
+    sort_end_year: 2020
+    sort_end_month: 5
+    display_priority: 5
+    evidence_status: self-reported
+    concurrent_note: "Concurrent with other work during this period."
+    scope: "Cross-border recruitment support for Philippine customer-service candidates relocating to Shanghai."
+    bullets:
+      - "Prepared job descriptions and supported screening, interviews, scheduling, evaluation, and candidate communication."
+      - "Maintained applicant tracking and hiring documentation for coordination with the China-based team."
+    capability_ids:
+      - operating-systems
+
+  - id: fast-gateway-system
+    stage_id: customer-recruitment-sales
+    organization: "Fast Gateway System"
+    actual_title: "Customer Operations Lead"
+    start_label: "April 2022"
+    end_label: "July 2022"
+    sort_start_year: 2022
+    sort_start_month: 4
+    sort_end_year: 2022
+    sort_end_month: 7
+    display_priority: 6
+    evidence_status: self-reported
+    concurrent_note: "Concurrent with other work during this period."
+    scope: "Remote customer operations for a fintech platform, including escalation, workflow, and reporting support."
+    bullets:
+      - "Coordinated customer escalations, agent activity, KYC/AML workflow support, and fraud-response tracking."
+      - "Created fraud-response tracking and reporting routines to support management visibility and audit readiness."
+    capability_ids:
+      - operating-systems
+      - decision-systems
+
+  - id: red-team-partners
+    stage_id: revenue-procurement-delivery
+    organization: "Red Team Partners"
+    actual_title: "Business Operations, Sales & Procurement Lead"
+    start_label: "August 2022"
+    end_label: "September 2023"
+    sort_start_year: 2022
+    sort_start_month: 8
+    sort_end_year: 2023
+    sort_end_month: 9
+    display_priority: 7
+    evidence_status: self-reported
+    scope: "Cybersecurity sales, commercial operations, procurement, and cross-functional coordination across APAC and Europe."
+    bullets:
+      - "Supported client coordination, sales administration, vendor sourcing, procurement, and internal handoffs."
+      - "Gathered requirements and coordinated testing and rollout activities for internal sales and procurement workflows."
+      - "Translated technical and commercial inputs into quotations, supplier comparisons, order documentation, and next actions."
+    capability_ids:
+      - operating-systems
+      - revenue-client-systems
+      - decision-systems
+
+  - id: boab-it
+    stage_id: revenue-procurement-delivery
+    organization: "Boab IT"
+    actual_title: "Client Operations & IT Service Coordinator"
+    engagement_type: "Contract"
+    start_label: "October 2023"
+    end_label: "January 2024"
+    sort_start_year: 2023
+    sort_start_month: 10
+    sort_end_year: 2024
+    sort_end_month: 1
+    display_priority: 8
+    evidence_status: self-reported
+    concurrent_note: "Concurrent with the start of the BPO Sales Group role."
+    scope: "Client, service, and CRM record coordination for an Australian IT services provider."
+    bullets:
+      - "Maintained client, service, and CRM records and coordinated first-line ticket triage with technical specialists."
+      - "Built a documented employee-recognition nomination and reporting workflow using Microsoft 365 tools and Power BI."
+    capability_ids:
+      - operating-systems
+      - revenue-client-systems
+      - decision-systems
+
+  - id: bpo-sales-group
+    stage_id: client-services-operating-design
+    organization: "BPO Sales Group"
+    actual_title: "Director of Client Services"
+    functional_descriptor: "Business Operations & CRM Enablement"
+    start_label: "October 2023"
+    end_label: "Present"
+    sort_start_year: 2023
+    sort_start_month: 10
+    display_priority: 9
+    evidence_status: self-reported
+    concurrent_note: "Overlaps with separately documented contract and special-project work."
+    scope: "Client-service operations connecting business-development readiness, CRM enablement, recruitment, vendor coordination, and delivery handoffs."
+    bullets:
+      - "Supports discovery, letters of understanding, readiness trackers, BDA recruitment and enablement, CRM setup and training, RFQ documentation, campaigns, and dialer coordination."
+      - "Creates SOPs, process maps, templates, enablement materials, feedback loops, and reporting structures."
+      - "Coordinates clients, specialists, vendors, and business-development resources to clarify ownership and surface blockers."
+    capability_ids:
+      - operating-systems
+      - revenue-client-systems
+      - decision-systems
+
+  - id: red-team-partners-group
+    stage_id: client-services-operating-design
+    organization: "Red Team Partners Group"
+    actual_title: "Head of Strategic Partnerships & Special Operations"
+    functional_descriptor: "Partnerships and special-project coordination"
+    start_label: "January 2025"
+    end_label: "Present"
+    sort_start_year: 2025
+    sort_start_month: 1
+    display_priority: 10
+    evidence_status: self-reported
+    concurrent_note: "Concurrent with the current BPO Sales Group role."
+    scope: "Confidential, high-priority partnership and cross-functional initiatives supporting the principal."
+    bullets:
+      - "Supports partnership research, qualification, commercial coordination, and follow-up."
+      - "Translates loosely defined priorities into structured next actions and working materials."
+    capability_ids:
+      - operating-systems
+      - revenue-client-systems
+
+  - id: the-retail-group-uk
+    stage_id: revenue-procurement-delivery
+    organization: "The Retail Group UK"
+    actual_title: "Sales Operations Architecture Consultant"
+    functional_descriptor: "Proposed sales operating-model design"
+    engagement_type: "Contract project"
+    start_label: "January 2026"
+    end_label: "March 2026"
+    sort_start_year: 2026
+    sort_start_month: 1
+    sort_end_year: 2026
+    sort_end_month: 3
+    display_priority: 11
+    evidence_status: self-reported
+    concurrent_note: "Time-bounded contract project concurrent with current roles."
+    scope: "Proposed warm-lead and multi-vertical cold-lead sales operating models."
+    bullets:
+      - "Designed proposed qualification, routing, channel-sequencing, handoff, and decision rules."
+      - "Produced architecture and enablement materials; post-launch adoption and commercial outcomes were not verified."
+    capability_ids:
+      - operating-systems
+      - revenue-client-systems
+      - decision-systems
+industries:
+  - Fintech
+  - Cybersecurity
+  - Crypto
+  - BPO and client services
+  - B2B services
+working_style:
+  - "Clarity before complexity"
+  - "Documented ownership and handoffs"
+  - "Practical controls teams can maintain"
+  - "Decision support grounded in operational context"
+contact:
+  linkedin: "https://www.linkedin.com/in/ninasuico/"
+  email: "mailto:ninasuicox@gmail.com"
+  github: "https://github.com/xxReina-28"
+  resume: "/assets/docs/resume.pdf"
