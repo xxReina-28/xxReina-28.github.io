@@ -80,7 +80,9 @@ $attributePattern = '(?:href|src)=["'']([^"'']+)["'']'
 
 foreach ($htmlFile in $htmlFiles) {
     $html = Get-Content -LiteralPath $htmlFile.FullName -Raw -Encoding utf8
-    $relativeHtml = [System.IO.Path]::GetRelativePath($siteRoot, $htmlFile.FullName)
+    $relativeHtml = $htmlFile.FullName.Substring($siteRoot.Length).TrimStart(
+        [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    )
     if ($html -notmatch '(?is)<title>\s*\S.+?</title>') {
         $failures.Add("Missing or empty document title in ${relativeHtml}")
     }
