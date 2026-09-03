@@ -42,8 +42,10 @@ jobs:
           $ErrorActionPreference = "Stop"
           $env:JEKYLL_ENV = "production"
           $buildLog = Join-Path $env:RUNNER_TEMP "jekyll-build.log"
+          $ErrorActionPreference = "Continue"
           bundle exec jekyll build --trace 2>&1 | Tee-Object -FilePath $buildLog
           $buildExitCode = $LASTEXITCODE
+          $ErrorActionPreference = "Stop"
           if ($buildExitCode -ne 0) {
             $annotation = (Get-Content -LiteralPath $buildLog -Raw) `
               -replace '%', '%25' `
