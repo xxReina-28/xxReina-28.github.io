@@ -1,0 +1,18 @@
+{% assign profile = site.data.profile %}
+<div class="career-progression">
+  {% for stage in profile.career_stages %}
+    <details class="career-stage"{% if stage.expanded %} open{% endif %}>
+      <summary>
+        <span class="career-stage-title">{{ stage.title }}</span>
+        <span class="career-stage-summary">{{ stage.summary }}</span>
+      </summary>
+      <div class="career-role-list">
+        {% for role in profile.career_progression %}
+          {% if role.stage_id == stage.id %}
+            {% include career-role.html role=role %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </details>
+  {% endfor %}
+</div>

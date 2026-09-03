@@ -7,7 +7,8 @@ permalink: /about/
 {% assign profile = site.data.profile %}
 
 <section aria-labelledby="narrative-heading">
-  <h2 id="narrative-heading">Professional narrative</h2>
+  <p class="eyebrow">Business Operations &amp; Systems Analyst</p>
+  <h2 id="narrative-heading">Professional introduction</h2>
   {% for paragraph in profile.professional_narrative %}<p>{{ paragraph }}</p>{% endfor %}
   <p>{{ profile.market_context }} Current market context includes {{ profile.markets | join: ', ' }}.</p>
   <p class="muted">{{ profile.location_label }} · {{ profile.mobility_label }} · {{ profile.availability_label }}</p>
@@ -16,27 +17,32 @@ permalink: /about/
 {% if profile.career_progression and profile.career_progression.size > 0 %}
 <section aria-labelledby="career-heading">
   <h2 id="career-heading">Career progression</h2>
-  <ol>{% for item in profile.career_progression %}<li>{{ item }}</li>{% endfor %}</ol>
+  <p>The chronology includes concurrent, contract, and supplementary work. Overlaps are labeled where the source supports that context.</p>
+  {% include career-progression.html %}
 </section>
 {% endif %}
 
 <section aria-labelledby="development-heading">
-  <h2 id="development-heading">Capability development</h2>
-  <div class="grid grid-3">
-    {% for capability in site.data.capabilities %}
-      {% include capability-card.html capability=capability %}
-    {% endfor %}
-  </div>
+  <h2 id="development-heading">Cross-functional capability development</h2>
+  <p>Each chapter added another view of the same operating system: customer needs, administrative execution, commercial flow, delivery coordination, reporting, and management decisions.</p>
 </section>
 
-<section class="split-sections">
-  <div>
-    <h2>Industries and operating contexts</h2>
-    <ul>{% for industry in profile.industries %}<li>{{ industry }}</li>{% endfor %}</ul>
-  </div>
-  <div>
-    <h2>Working style</h2>
-    <ul>{% for item in profile.working_style %}<li>{{ item }}</li>{% endfor %}</ul>
+<section aria-labelledby="contexts-heading">
+  <h2 id="contexts-heading">Industries and operating contexts</h2>
+  <ul>{% for industry in profile.industries %}<li>{{ industry }}</li>{% endfor %}</ul>
+</section>
+
+<section aria-labelledby="pillars-heading">
+  <h2 id="pillars-heading">How the experience connects to the three capability pillars</h2>
+  <div class="grid grid-3">
+    {% for capability in site.data.capabilities %}
+      {% if capability.status == 'approved' %}
+        <article class="card">
+          <h3>{{ capability.title }}</h3>
+          <p>{{ capability.career_basis }}</p>
+        </article>
+      {% endif %}
+    {% endfor %}
   </div>
 </section>
 
@@ -47,5 +53,17 @@ permalink: /about/
       {% include credential-item.html credential=credential %}
     {% endfor %}
   </ul>
-  <p><a class="btn btn-ghost" href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a></p>
+</section>
+
+<section aria-labelledby="working-style-heading">
+  <h2 id="working-style-heading">Working style</h2>
+  <ul>{% for item in profile.working_style %}<li>{{ item }}</li>{% endfor %}</ul>
+</section>
+
+<section aria-labelledby="about-actions-heading">
+  <h2 id="about-actions-heading">Résumé and contact</h2>
+  <div class="btn-row">
+    <a class="btn" href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a>
+    <a class="btn btn-ghost" href="{{ '/contact/' | relative_url }}">Contact Nina</a>
+  </div>
 </section>

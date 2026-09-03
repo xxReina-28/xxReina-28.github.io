@@ -517,6 +517,51 @@ details.cred-details{ margin-top: 0.25rem; }
   border: 1px solid rgba(255,255,255,0.10);
 }
 
+/* Career progression */
+.career-progression{ display: grid; gap: 1rem; }
+
+.career-stage{
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.career-stage > summary{
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.career-stage > summary:focus-visible{
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+.career-stage-title{ color: var(--text); font-size: 1.05rem; font-weight: 800; }
+.career-stage-summary,
+.career-role-dates,
+.career-role-organization,
+.career-functional{ color: var(--muted); }
+
+.career-role-list{
+  border-top: 1px solid var(--card-border);
+  padding: 0 1.25rem;
+}
+
+.career-role{ padding: 1.35rem 0; }
+.career-role + .career-role{ border-top: 1px solid var(--card-border); }
+.career-role h3,
+.career-role p{ margin-top: 0.35rem; margin-bottom: 0.35rem; }
+.career-role-dates{ font-size: 0.82rem; font-weight: 700; text-transform: uppercase; }
+.career-functional{ font-style: italic; }
+
+.career-concurrent{
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+  font-size: 0.9rem;
+}
+
 /* =========================================================
    Small screens
    ========================================================= */
@@ -531,6 +576,8 @@ details.cred-details{ margin-top: 0.25rem; }
   .badge{ font-size: 0.78rem; }
   .section-heading-row{ align-items: flex-start; flex-direction: column; }
   .status-list{ grid-template-columns: minmax(0, 1fr); }
+  .career-stage > summary,
+  .career-role-list{ padding-left: 1rem; padding-right: 1rem; }
 }
 
 /* Work collection structure */

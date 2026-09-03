@@ -12,6 +12,7 @@ $allowedImplementationStatuses = @("implemented", "completed-project", "document
 $allowedDataClassifications = @("professional", "synthetic", "mixed", "not-applicable")
 $allowedOutcomeStatuses = @("verified", "artifact-supported", "self-reported", "unverified", "synthetic", "not-applicable")
 $allowedCredentialStatuses = @("verified", "artifact-supported", "self-reported", "unverified")
+$careerCapabilityIds = @("operating-systems", "revenue-client-systems", "decision-systems")
 
 function Get-FrontMatter {
     param([string]$Path)
@@ -84,6 +85,134 @@ foreach ($requiredProfileField in @("name", "role", "value_proposition", "suppor
 }
 if ((Get-ScalarValue -Content $profileContent -Key "name") -ne "Nina Suico") {
     $failures.Add("Canonical public profile name must be Nina Suico")
+}
+
+$careerStageSectionMatch = [regex]::Match(
+    $profileContent,
+    '(?ms)^career_stages:\s*\r?\n(?<records>.*?)(?=^career_progression:)'
+)
+$careerStageIds = if ($careerStageSectionMatch.Success) {
+    @([regex]::Matches($careerStageSectionMatch.Groups['records'].Value, '(?m)^\s{2}- id:\s*["'']?([^"''\s]+)') |
+        ForEach-Object { $_.Groups[1].Value })
+} else { @() }
+foreach ($duplicate in @($careerStageIds | Group-Object | Where-Object Count -gt 1)) {
+    $failures.Add("Duplicate career stage: $($duplicate.Name)")
+}
+
+$careerSectionMatch = [regex]::Match(
+    $profileContent,
+    '(?ms)^career_progression:\s*\r?\n(?<records>.*?)(?=^industries:)'
+)
+$careerRecords = @{}
+$careerPriorities = [System.Collections.Generic.List[int]]::new()
+if (-not $careerSectionMatch.Success) {
+    $failures.Add("Profile is missing the canonical career_progression collection")
+} else {
+    foreach ($careerMatch in [regex]::Matches(
+        $careerSectionMatch.Groups['records'].Value,
+        '(?ms)^\s{2}- id:\s*["'']?([^"''\s]+)["'']?\s*\r?\n(?<record>.*?)(?=^\s{2}- id:|\z)'
+    )) {
+        $careerId = $careerMatch.Groups[1].Value
+        $record = $careerMatch.Value
+        if ($careerRecords.ContainsKey($careerId)) {
+            $failures.Add("Duplicate career record: $careerId")
+            continue
+        }
+        $careerRecords[$careerId] = $record
+
+        $actualTitle = Get-ScalarValue -Content $record -Key "actual_title"
+        $stageId = Get-ScalarValue -Content $record -Key "stage_id"
+        $startLabel = Get-ScalarValue -Content $record -Key "start_label"
+        $endLabel = Get-ScalarValue -Content $record -Key "end_label"
+        $startYear = Get-ScalarValue -Content $record -Key "sort_start_year"
+        $startMonth = Get-ScalarValue -Content $record -Key "sort_start_month"
+        $endYear = Get-ScalarValue -Content $record -Key "sort_end_year"
+        $endMonth = Get-ScalarValue -Content $record -Key "sort_end_month"
+        $priority = Get-ScalarValue -Content $record -Key "display_priority"
+        $evidenceStatus = Get-ScalarValue -Content $record -Key "evidence_status"
+
+        if ([string]::IsNullOrWhiteSpace($actualTitle)) {
+            $failures.Add("Career record is missing actual_title: $careerId")
+        }
+        if ($careerStageIds -notcontains $stageId) {
+            $failures.Add("Career record has a missing or invalid stage_id: $careerId")
+        }
+        if ([string]::IsNullOrWhiteSpace($startLabel) -or [string]::IsNullOrWhiteSpace($endLabel)) {
+            $failures.Add("Career record is missing a display chronology label: $careerId")
+        }
+        if ($startYear -notmatch '^\d{4}$' -or $startMonth -notmatch '^\d{1,2}$' -or
+            [int]$startMonth -lt 1 -or [int]$startMonth -gt 12) {
+            $failures.Add("Career record has invalid start chronology fields: $careerId")
+        }
+        if ($endLabel -ne "Present" -and
+            ($endYear -notmatch '^\d{4}$' -or $endMonth -notmatch '^\d{1,2}$' -or
+             [int]$endMonth -lt 1 -or [int]$endMonth -gt 12)) {
+            $failures.Add("Career record has invalid end chronology fields: $careerId")
+        }
+        if ($endLabel -ne "Present" -and $startYear -match '^\d{4}$' -and $startMonth -match '^\d{1,2}$' -and
+            $endYear -match '^\d{4}$' -and $endMonth -match '^\d{1,2}$' -and
+            (([int]$endYear * 12 + [int]$endMonth) -lt ([int]$startYear * 12 + [int]$startMonth))) {
+            $failures.Add("Career record ends before it starts: $careerId")
+        }
+        if ($priority -notmatch '^\d+$') {
+            $failures.Add("Career record has invalid display_priority: $careerId")
+        } else {
+            $careerPriorities.Add([int]$priority)
+        }
+        if ($allowedEvidenceStatuses -notcontains $evidenceStatus) {
+            $failures.Add("Career record has missing or invalid evidence_status: $careerId")
+        }
+
+        $bulletMatch = [regex]::Match($record, '(?ms)^\s{4}bullets:\s*\r?\n(?<items>(?:\s{6}-\s+[^\r\n]+\r?\n?)*)')
+        $bulletCount = if ($bulletMatch.Success) {
+            [regex]::Matches($bulletMatch.Groups['items'].Value, '(?m)^\s{6}-\s+').Count
+        } else { 0 }
+        if ($bulletCount -gt 3) {
+            $failures.Add("Career record has more than three bullets: $careerId")
+        }
+        $capabilityMatch = [regex]::Match($record, '(?ms)^\s{4}capability_ids:\s*\r?\n(?<items>(?:\s{6}-\s+[^\r\n]+\r?\n?)*)')
+        foreach ($capabilityIdMatch in [regex]::Matches($capabilityMatch.Groups['items'].Value, '(?m)^\s{6}-\s+["'']?([^"''\s]+)')) {
+            if ($careerCapabilityIds -notcontains $capabilityIdMatch.Groups[1].Value) {
+                $failures.Add("Career record has an invalid capability reference '$($capabilityIdMatch.Groups[1].Value)': $careerId")
+            }
+        }
+    }
+}
+
+foreach ($duplicate in @($careerPriorities | Group-Object | Where-Object Count -gt 1)) {
+    $failures.Add("Duplicate career display priority: $($duplicate.Name)")
+}
+
+$approvedChronology = @{
+    "canadian-telecommunications-account" = @("August 2016", "January 2017")
+    "eo-business-process-outsourcing" = @("April 2017", "September 2017")
+    "neuto" = @("December 2017", "May 2019")
+    "blitz" = @("June 2019", "July 2022")
+    "shang-li-information-technology" = @("November 2019", "May 2020")
+    "fast-gateway-system" = @("April 2022", "July 2022")
+    "red-team-partners" = @("August 2022", "September 2023")
+    "boab-it" = @("October 2023", "January 2024")
+    "bpo-sales-group" = @("October 2023", "Present")
+}
+foreach ($careerId in $approvedChronology.Keys) {
+    if (-not $careerRecords.ContainsKey($careerId)) {
+        $failures.Add("Approved chronology is missing career record: $careerId")
+        continue
+    }
+    $record = $careerRecords[$careerId]
+    $expected = $approvedChronology[$careerId]
+    if ((Get-ScalarValue -Content $record -Key "start_label") -ne $expected[0] -or
+        (Get-ScalarValue -Content $record -Key "end_label") -ne $expected[1]) {
+        $failures.Add("Career record conflicts with approved dates: $careerId")
+    }
+}
+if ($careerRecords.ContainsKey("bpo-sales-group") -and
+    (Get-ScalarValue -Content $careerRecords["bpo-sales-group"] -Key "actual_title") -ne "Director of Client Services") {
+    $failures.Add("Current BPO Sales Group title must remain Director of Client Services")
+}
+if (-not $careerRecords.ContainsKey("neuto") -or
+    (Get-ScalarValue -Content $careerRecords["neuto"] -Key "actual_title") -notmatch 'Executive Assistant|Personal Assistant') {
+    $failures.Add("The Executive Assistant/Personal Assistant career chapter must remain present")
 }
 
 $statusFiles = @(
@@ -393,6 +522,15 @@ foreach ($publicTextFile in $publicTextFiles) {
     if ($withoutAllowedGithubIdentity -match '(?i)\bReina\b') {
         $failures.Add("Non-canonical Reina display name in publishable source: $publicTextFile")
     }
+    if ($publicText -match '\b\d+(?:\.\d+)?%') {
+        $failures.Add("Unsupported percentage metric in publishable source: $publicTextFile")
+    }
+    if ($publicText -match '(?i)\b(?:bachelor(?:''s)?|master(?:''s)?)\s+(?:degree|of|in)|\bdegree holder\b') {
+        $failures.Add("Unsupported degree claim in publishable source: $publicTextFile")
+    }
+    if ($publicText -match '(?i)\b(?:managed|led|supervised)\s+(?:a\s+)?team\s+of\s+\d+|\b\d+\s+direct reports\b') {
+        $failures.Add("Unsupported team-size or authority claim in publishable source: $publicTextFile")
+    }
 }
 
 if ($failures.Count -gt 0) {
@@ -400,4 +538,4 @@ if ($failures.Count -gt 0) {
     exit 1
 }
 
-Write-Output "Content validation passed: $($groupCapabilityIds.Count) capability groups, $($projectRecords.Count) projects, $($caseStudyRecords.Count) case studies, and approved-only publication guards."
+Write-Output "Content validation passed: $($groupCapabilityIds.Count) capability groups, $($careerRecords.Count) career records, $($projectRecords.Count) projects, $($caseStudyRecords.Count) case studies, and approved-only publication guards."

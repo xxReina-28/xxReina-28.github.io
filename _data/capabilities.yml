@@ -2,6 +2,7 @@
   title: "Operating Systems"
   status: approved
   evidence_status: self-reported
+  career_basis: "Frontline service, order controls, executive support, customer operations, project coordination, and client-service delivery developed a practical view of ownership, handoffs, and operating controls."
   claims:
     - id: workflow-process-design
       label: "Workflow and process design"
@@ -26,6 +27,7 @@
   title: "Revenue & Client Systems"
   status: approved
   evidence_status: self-reported
+  career_basis: "Sales administration, qualification, account coordination, CRM enablement, recruitment, campaigns, and sales-to-delivery work connect commercial activity with usable client operations."
   platforms:
     - Salesforce
     - HubSpot
@@ -54,6 +56,7 @@
   title: "Decision Systems"
   status: approved
   evidence_status: self-reported
+  career_basis: "Operational records, compliance logs, supplier comparisons, reporting structures, workflow testing, and management visibility requirements support evidence-aware decisions."
   claims:
     - id: operational-reporting
       label: "Operational reporting"

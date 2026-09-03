@@ -1,0 +1,21 @@
+{% assign role = include.role %}
+<article class="career-role">
+  <header>
+    <p class="career-role-dates">{{ role.start_label }} to {{ role.end_label }}</p>
+    <h3>{{ role.actual_title }}</h3>
+    <p class="career-role-organization">{{ role.organization }}{% if role.engagement_type %} · {{ role.engagement_type }}{% endif %}</p>
+    {% if role.functional_descriptor %}<p class="career-functional">Functional focus: {{ role.functional_descriptor }}</p>{% endif %}
+    {% if role.concurrent_note %}<p class="career-concurrent"><strong>Concurrent work:</strong> {{ role.concurrent_note }}</p>{% endif %}
+  </header>
+  <p>{{ role.scope }}</p>
+  {% if role.bullets and role.bullets.size > 0 %}
+    <ul>{% for bullet in role.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+  {% endif %}
+  <ul class="status-labels" aria-label="Capability and evidence labels">
+    <li class="status-label">Evidence: {{ role.evidence_status | replace: '-', ' ' }}</li>
+    {% for capability_id in role.capability_ids %}
+      {% assign capability = site.data.capabilities | where: 'id', capability_id | first %}
+      {% if capability %}<li class="status-label">{{ capability.title }}</li>{% endif %}
+    {% endfor %}
+  </ul>
+</article>
