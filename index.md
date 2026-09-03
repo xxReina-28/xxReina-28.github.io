@@ -1,244 +1,86 @@
 ---
 layout: default
-title: "Niña Suico | Business Systems & Operations Automation"
 ---
+{% assign profile = site.data.profile %}
+{% assign homepage = site.data.homepage %}
 
-<section class="section">
-
-  <div class="profile card">
-    <img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Reina profile photo" class="avatar" />
-
-    <div>
-      <h1>Niña Peterine Sheen Suico</h1>
-
-      <p class="muted">Business Systems. Operations Automation. Data Analytics</p>
-      <p class="muted">
-        Manila, Philippines (currently traveling). Open to worldwide opportunities. Willing to relocate and open to remote work.
-      </p>
-
+<section class="section hero-section" aria-labelledby="hero-heading">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <div class="hero-identity">
+        <img src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Portrait of Nina Suico" class="avatar" width="72" height="72" />
+        <p><strong>Nina Suico</strong><span>{{ profile.role }}</span></p>
+      </div>
+      <p class="eyebrow">{{ profile.role }}</p>
+      <h1 id="hero-heading">{{ profile.value_proposition }}</h1>
+      <p class="lead">{{ profile.supporting_statement }}</p>
+      <p>{{ profile.market_context }}</p>
+      <p class="muted">{{ profile.location_label }} · {{ profile.mobility_label }} · {{ profile.availability_label }}</p>
       <div class="btn-row">
-        <a class="btn" href="{{ '/assets/docs/resume.pdf' | relative_url }}" target="_blank" rel="noopener">Resume</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ninasuico/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/xxReina-28" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="{{ '/work/' | relative_url }}">View selected work</a>
+        <a class="btn btn-ghost" href="{{ profile.contact.resume | relative_url }}" target="_blank" rel="noopener">View résumé (PDF)</a>
       </div>
     </div>
+    {% include systems-map.html %}
   </div>
-
 </section>
 
-<section class="section">
+<section class="section" aria-labelledby="problems-heading">
+  <div class="section-intro"><p class="eyebrow">01 · Diagnose</p><h2 id="problems-heading" class="section-title">{{ homepage.problems_heading }}</h2></div>
+  <ul class="problem-grid">
+    {% for problem in homepage.problems %}<li class="problem-module glass-surface"><span aria-hidden="true">0{{ forloop.index }}</span><p>{{ problem }}</p></li>{% endfor %}
+  </ul>
+</section>
 
+<section class="section" aria-labelledby="capabilities-heading">
+  <div class="section-intro"><p class="eyebrow">02 · Structure</p><h2 id="capabilities-heading" class="section-title">Three Capability Pillars</h2></div>
   <div class="grid grid-3">
-
-    <div class="card">
-      <h2>About Me</h2>
-
-      <p>
-        I build systems that make work easier. Clear workflows, structured processes,
-        and tools that support people instead of complicating their jobs.
-      </p>
-
-      <p>
-        My work sits between operations and technology. I translate messy real-world
-        workflows into automation, documentation, and dashboards that leadership can trust.
-        My background spans client services, BPO operations, and cross-functional teams
-        across fintech, cybersecurity, and B2B environments.
-      </p>
-
-      <p>
-        I prioritize clarity over complexity. If I cannot win the situation,
-        I redesign the system that defines it.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Details</h2>
-
-      <p><strong>Base</strong><br/>
-      Manila, Philippines (currently traveling)</p>
-
-      <p><strong>Work Mode</strong><br/>
-      Open to remote. Open to relocation. Worldwide opportunities.</p>
-
-      <p><strong>Focus</strong><br/>
-      Operations systems, automation, reporting, and execution support.</p>
-
-      <p><strong>Industries</strong><br/>
-      Fintech, cybersecurity, crypto, B2B services</p>
-
-      <p><strong>Interests</strong></p>
-      <div class="badges">
-        <span class="badge">Automation</span>
-        <span class="badge">Ops Systems</span>
-        <span class="badge">Analytics</span>
-        <span class="badge">Culture & Travel</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Capabilities</h2>
-
-      <details class="cap-details">
-        <summary>
-          <div class="cap-summary">
-            <span class="muted">Tap to expand full capability map</span>
-            <span class="cap-chevron">▾</span>
-          </div>
-
-          <ul class="cap-mini">
-            <li><strong>Business Systems & Automation</strong></li>
-            <li><strong>Operations & Process Excellence</strong></li>
-            <li><strong>Data & Analytics</strong></li>
-            <li><strong>Client & Stakeholder Operations</strong></li>
-            <li><strong>Execution & Leadership Support</strong></li>
-          </ul>
-        </summary>
-
-        <div class="cap-full">
-          <p><strong>Business Systems & Automation</strong></p>
-          <ul>
-            <li>Workflow automation (forms, approvals, reminders)</li>
-            <li>CRM systems design & optimization (Salesforce, HubSpot, Zoho)</li>
-            <li>Process mapping, SOPs, and system documentation</li>
-            <li>Cross-platform integrations and operational tooling</li>
-          </ul>
-
-          <p><strong>Operations & Process Excellence</strong></p>
-          <ul>
-            <li>Business process optimization and workflow redesign</li>
-            <li>KPI definition, monitoring, and reporting</li>
-            <li>Cross-functional coordination and execution support</li>
-            <li>Continuous improvement and operational scaling</li>
-          </ul>
-
-          <p><strong>Data & Analytics</strong></p>
-          <ul>
-            <li>Operational dashboards and reporting</li>
-            <li>Data modeling for business visibility</li>
-            <li>SQL-based analysis and Power BI reporting</li>
-            <li>Translating data into decision-ready insights</li>
-          </ul>
-
-          <p><strong>Client & Stakeholder Operations</strong></p>
-          <ul>
-            <li>Client onboarding and lifecycle support</li>
-            <li>KYC/AML workflows (fintech & crypto context)</li>
-            <li>Issue resolution, UAT testing, and process QA</li>
-            <li>Vendor, partner, and internal stakeholder coordination</li>
-          </ul>
-
-          <p><strong>Execution & Leadership Support</strong></p>
-          <ul>
-            <li>Project coordination and delivery support</li>
-            <li>Executive reporting and documentation</li>
-            <li>Change enablement across teams</li>
-            <li>Calm execution under ambiguity and pressure</li>
-          </ul>
-        </div>
-      </details>
-    </div>
-
+    {% for capability in site.data.capabilities %}
+      {% include capability-card.html capability=capability index=forloop.index %}
+    {% endfor %}
   </div>
-
 </section>
 
-<section class="section">
-
-  <h2 class="section-title">Featured Projects</h2>
-
-  <div class="project-grid">
-
-    <div class="card project-card">
-      <h3>Employee of the Month Automation</h3>
-      <p class="muted">
-        End-to-end nomination, reminders, scoring workflow, and Power BI analytics.
-        Built with Microsoft Forms, Power Automate, SharePoint, and Power BI.
-      </p>
-
-      <div class="badges">
-        <span class="badge">Power Automate</span>
-        <span class="badge">SharePoint</span>
-        <span class="badge">Power BI</span>
-        <span class="badge">Ops Systems</span>
-      </div>
-
-      <div class="btn-row">
-        <a class="btn" href="https://github.com/xxReina-28/Employee-of-the-Month-Automation" target="_blank" rel="noopener">View Repo</a>
-      </div>
-    </div>
-
-    <div class="card project-card">
-      <h3>Pipeline Strategist Agent</h3>
-      <p class="muted">
-        Automated lead ingestion, cleaning, segmentation, scoring,
-        and outbound playbook generation for GTM workflows.
-      </p>
-      <p class="muted">
-        Built as a capstone project for the Google × Kaggle 5-Day AI Agents Intensive Course.
-      </p>
-
-      <div class="badges">
-        <span class="badge">Python</span>
-        <span class="badge">Agents</span>
-        <span class="badge">Automation</span>
-      </div>
-
-      <div class="btn-row">
-        <a class="btn" href="https://github.com/xxReina-28/Pipeline-strategist-agent-v2" target="_blank" rel="noopener">View Repo</a>
-      </div>
-    </div>
-
+<section class="section" aria-labelledby="work-heading">
+  <div class="section-heading-row">
+    <div class="section-intro"><p class="eyebrow">03 · Evidence</p><h2 id="work-heading" class="section-title">Selected Work</h2></div>
+    <a class="text-link" href="{{ '/work/' | relative_url }}">View all work</a>
   </div>
-
+  {% include work-grid.html featured_only=true case_studies_only=true %}
 </section>
 
-<section class="section">
-
-  <h2 class="section-title">Credentials & Certifications</h2>
-
-  <div class="card">
-    <details class="cred-details">
-      <summary>
-        <div class="cred-summary">
-          <span class="muted">Tap to expand credentials</span>
-          <span class="cred-chevron">▾</span>
-        </div>
-
-        <ul class="cred-mini">
-          <li><strong>Google × Kaggle</strong> . AI Agents Intensive (Nov 2025)</li>
-          <li><strong>Certified ScrumMaster (CSM)</strong></li>
-          <li><strong>Lean Six Sigma Yellow Belt</strong></li>
-          <li><strong>HubSpot</strong> . Sales, Marketing, Reporting</li>
-        </ul>
-      </summary>
-
-      <div class="cred-full">
-
-        <p><strong>5-Day AI Agents Intensive Course</strong></p>
-        <p class="muted"><strong>Issuer:</strong> Google × Kaggle</p>
-        <p class="muted">
-          Completed an intensive, hands-on program focused on designing and deploying AI agents.
-          Applied concepts through a capstone build (Pipeline Strategist Agent).
-        </p>
-
-        <div class="badges">
-          <span class="badge">AI Agents</span>
-          <span class="badge">Applied Build</span>
-          <span class="badge">Automation</span>
-        </div>
-
-        <p class="muted">November 2025</p>
-
-        <hr class="cred-divider"/>
-
-        <ul class="cred-list">
-          <li><strong>Certified ScrumMaster (CSM)</strong></li>
-          <li><strong>Lean Six Sigma Yellow Belt</strong></li>
-          <li><strong>HubSpot Certifications</strong> . Sales, Marketing, Reporting</li>
-        </ul>
-
-      </div>
-    </details>
-  </div>
-
+<section class="section" aria-labelledby="approach-heading">
+  <div class="section-intro"><p class="eyebrow">04 · Method</p><h2 id="approach-heading" class="section-title">{{ homepage.how_i_work_heading }}</h2></div>
+  <ol class="method-sequence">
+    {% for item in homepage.how_i_work %}
+      <li class="method-step glass-surface">
+        <span class="method-index" aria-hidden="true">0{{ forloop.index }}</span>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </li>
+    {% endfor %}
+  </ol>
 </section>
+
+<section class="section" aria-labelledby="about-heading">
+  <div class="narrative-panel glass-surface">
+    <p class="eyebrow">05 · Context</p>
+    <h2 id="about-heading">{{ homepage.about_heading }}</h2>
+    <p>{{ homepage.about_summary }}</p>
+    <a class="text-link" href="{{ '/about/' | relative_url }}">Read the professional narrative</a>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="credentials-heading">
+  <div class="section-intro"><p class="eyebrow">06 · Development</p><h2 id="credentials-heading" class="section-title">Credentials</h2></div>
+  <div>
+    <ul class="credential-list credential-grid">
+      {% for credential in site.data.credentials %}
+        {% include credential-item.html credential=credential %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% assign contact_cta = site.data.ctas.items | where: 'id', 'contact' | first %}
+{% include cta-block.html cta=contact_cta %}

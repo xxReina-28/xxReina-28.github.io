@@ -1,0 +1,8 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import WorkCard from './WorkCard.astro';
+type Work = CollectionEntry<'caseStudies'> | CollectionEntry<'projects'>;
+interface Props { items: Work[]; className?: string }
+const { items, className = '' } = Astro.props;
+---
+<div class:list={['project-grid', className]}>{items.map((item) => <WorkCard item={item}/>)}</div>

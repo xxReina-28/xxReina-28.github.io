@@ -1,0 +1,17 @@
+{% assign approved_projects = site.projects | where: 'status', 'approved' %}
+{% assign approved_case_studies = site.case_studies | where: 'status', 'approved' | sort: 'flagship_order' %}
+{% if include.case_studies_only %}
+  {% assign approved_work = approved_case_studies %}
+{% else %}
+  {% assign approved_work = approved_projects | concat: approved_case_studies %}
+{% endif %}
+{% if include.featured_only %}
+  {% assign approved_work = approved_work | where: 'featured', true %}
+{% endif %}
+{% if approved_work.size > 0 %}
+  <div class="project-grid">
+    {% for item in approved_work %}
+      {% include work-card.html item=item %}
+    {% endfor %}
+  </div>
+{% endif %}

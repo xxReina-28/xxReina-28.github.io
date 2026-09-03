@@ -1,0 +1,5 @@
+---
+import { profile } from '../data';
+import CareerRole from './CareerRole.astro';
+---
+<div class="career-progression">{profile.career_stages.map((stage, index) => <details class="career-stage glass-surface" open={stage.expanded}><summary><span class="career-stage-index" aria-hidden="true">0{index + 1}</span><span class="career-stage-title">{stage.title}</span><span class="career-stage-summary">{stage.summary}</span><span class="career-stage-toggle" aria-hidden="true"></span></summary><div class="career-role-list">{profile.career_progression.filter((role) => role.stage_id === stage.id).map((role) => <CareerRole role={role}/>)}</div></details>)}</div>

@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import WorkGrid from '../../components/WorkGrid.astro';
+const caseStudies = (await getCollection('caseStudies')).sort((a, b) => (a.data.flagship_order ?? 99) - (b.data.flagship_order ?? 99));
+const projects = await getCollection('projects');
+---
+<PageLayout title="Work" description="Selected systems and technical projects, with clear disclosure of implementation, evidence, and data context."><section class="work-group" aria-labelledby="flagship-work-heading"><div class="work-group-heading"><p class="eyebrow">Portfolio simulations</p><h2 id="flagship-work-heading">Flagship Case Studies</h2><p>Executive summaries of synthetic scenarios, with the full supporting artifacts available as PDFs.</p></div><WorkGrid items={caseStudies} className="project-grid--flagship"/></section><section class="work-group" aria-labelledby="supporting-work-heading"><div class="work-group-heading"><h2 id="supporting-work-heading">Supporting Projects</h2></div><WorkGrid items={projects}/></section></PageLayout>

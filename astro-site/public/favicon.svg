@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">NS monogram</title>
+  <rect width="64" height="64" rx="14" fill="#242644"/>
+  <path d="M13 45V19l18 26V19M51 23c-2-3-5-5-9-5-5 0-9 3-9 7 0 10 19 5 19 15 0 4-4 7-10 7-4 0-8-2-10-5" fill="none" stroke="#dde0ec" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="51" cy="17" r="3" fill="#8ed8d0"/>
+</svg>

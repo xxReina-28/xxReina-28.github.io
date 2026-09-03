@@ -1,0 +1,70 @@
+name: Astro migration validation
+
+on:
+  push:
+    branches:
+      - astro-cloudflare-migration
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astro-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-visual-qa:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: astro-site
+    env:
+      ASTRO_TELEMETRY_DISABLED: "1"
+
+    steps:
+      - name: Check out migration source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up pinned Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: astro-site/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm.cmd ci --no-audit --no-fund
+
+      - name: Build and validate static output
+        run: npm.cmd run build
+
+      - name: Install pinned Chromium runtime
+        run: npx.cmd playwright install chromium
+
+      - name: Run Chromium route and visual QA
+        run: npm.cmd run qa
+
+      - name: Upload rendered Astro site
+        if: ${{ always() && hashFiles('astro-site/dist/**') != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: astro-rendered-site
+          path: astro-site/dist
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Upload Astro screenshots and QA reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: astro-visual-qa-screenshots
+          path: |
+            ${{ runner.temp }}\astro-visual-qa\screenshots
+            ${{ runner.temp }}\astro-visual-qa\portfolio-visual-qa-report.json
+            ${{ runner.temp }}\astro-visual-qa\portfolio-visual-qa-report.md
+          retention-days: 7
+          if-no-files-found: warn

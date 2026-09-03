@@ -1,7 +1,12 @@
 {% assign capability = include.capability %}
 {% if capability.status == 'approved' %}
-  <article class="card capability-card" data-capability-id="{{ capability.id }}">
+  <article class="card glass-surface capability-card capability-card--{{ capability.id }}" data-capability-id="{{ capability.id }}">
+    <div class="capability-card__header">
+      <span class="capability-index" aria-hidden="true">0{{ include.index }}</span>
+      {% include capability-mark.html capability_id=capability.id %}
+    </div>
     <h3>{{ capability.title }}</h3>
+    {% if capability.career_basis %}<p class="capability-summary">{{ capability.career_basis }}</p>{% endif %}
     {% assign approved_claims = capability.claims | where: 'status', 'approved' %}
     {% if approved_claims.size > 0 %}
       <ul>
@@ -9,6 +14,9 @@
           <li>{{ claim.label }}</li>
         {% endfor %}
       </ul>
+    {% endif %}
+    {% if capability.platforms and capability.platforms.size > 0 %}
+      <p class="muted capability-platforms"><strong>Platform exposure:</strong> {{ capability.platforms | join: ', ' }}</p>
     {% endif %}
   </article>
 {% endif %}

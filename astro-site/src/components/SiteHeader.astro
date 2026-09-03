@@ -1,0 +1,16 @@
+---
+import { navigation, profile } from '../data';
+const path = Astro.url.pathname;
+const isCurrent = (url: string) => url === '/' ? path === '/' : path.startsWith(url);
+---
+<header class="site-header">
+  <div class="site-header__inner glass-surface">
+    <a class="site-brand" href="/" aria-label="Nina Suico home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-identity"><strong>{profile.name}</strong><small>{profile.role}</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul>{navigation.map((item) => <li><a class:list={['site-nav__link', { 'is-current': isCurrent(item.url) }]} href={item.url} aria-current={isCurrent(item.url) ? 'page' : undefined}>{item.label}</a></li>)}</ul>
+    </nav>
+  </div>
+</header>

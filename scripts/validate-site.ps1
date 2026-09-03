@@ -23,8 +23,33 @@ if (-not (Test-Path -LiteralPath $siteRoot -PathType Container)) {
 $requiredRoutes = @(
     "index.html",
     "work\index.html",
+    "about\index.html",
+    "contact\index.html",
+    "work\business-operations-diagnostic-process-redesign\index.html",
+    "work\revenue-operations-sales-performance-system\index.html",
+    "work\strategic-procurement-supplier-decision-system\index.html",
+    "work\project-delivery-recovery-scrum-operating-system\index.html",
+    "work\employee-of-the-month-automation\index.html",
+    "work\pipeline-strategist-agent\index.html"
+)
+
+$forbiddenRoutes = @(
     "operations\index.html",
-    "services\index.html"
+    "services\index.html",
+    "_case_studies",
+    "_projects"
+)
+
+$requiredAssets = @(
+    "assets\css\style.css",
+    "assets\img\ns-mark.svg",
+    "assets\img\favicon.png",
+    "assets\img\profile.jpg",
+    "assets\docs\resume.pdf",
+    "assets\case-studies\operations-diagnostic-process-redesign.pdf",
+    "assets\case-studies\revenue-operations-sales-performance-system.pdf",
+    "assets\case-studies\strategic-procurement-supplier-decision-system.pdf",
+    "assets\case-studies\project-delivery-recovery-scrum-operating-system.pdf"
 )
 
 $failures = [System.Collections.Generic.List[string]]::new()
@@ -36,11 +61,37 @@ foreach ($route in $requiredRoutes) {
     }
 }
 
+foreach ($route in $forbiddenRoutes) {
+    $routePath = Join-Path $siteRoot $route
+    if (Test-Path -LiteralPath $routePath) {
+        $failures.Add("Unfinished or source-only route was generated: $route")
+    }
+}
+
+foreach ($asset in $requiredAssets) {
+    $assetPath = Join-Path $siteRoot $asset
+    if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
+        $failures.Add("Missing generated asset: $asset")
+    }
+}
+
 $htmlFiles = Get-ChildItem -LiteralPath $siteRoot -Filter "*.html" -File -Recurse
 $attributePattern = '(?:href|src)=["'']([^"'']+)["'']'
 
 foreach ($htmlFile in $htmlFiles) {
     $html = Get-Content -LiteralPath $htmlFile.FullName -Raw -Encoding utf8
+    $relativeHtml = $htmlFile.FullName.Substring($siteRoot.Length).TrimStart(
+        [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    )
+    if ($html -notmatch '(?is)<title>\s*\S.+?</title>') {
+        $failures.Add("Missing or empty document title in ${relativeHtml}")
+    }
+    if ([regex]::Matches($html, '(?is)<link\s+[^>]*rel=["'']canonical["''][^>]*href=["''][^"'']+["''][^>]*>').Count -ne 1) {
+        $failures.Add("Expected exactly one canonical link in ${relativeHtml}")
+    }
+    if ($html -match '(?i)(?:href|src)=["''][^"'']*/_(?:case_studies|projects)/') {
+        $failures.Add("Generated HTML exposes a source collection path in ${relativeHtml}")
+    }
     foreach ($match in [regex]::Matches($html, $attributePattern, "IgnoreCase")) {
         $url = $match.Groups[1].Value
         if ($url -match '^(?:https?:|mailto:|tel:|data:|#|//)') {
@@ -65,7 +116,6 @@ foreach ($htmlFile in $htmlFiles) {
         }
 
         if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
-            $relativeHtml = [System.IO.Path]::GetRelativePath($siteRoot, $htmlFile.FullName)
             $failures.Add("Broken local reference in ${relativeHtml}: $url")
         }
     }
@@ -76,4 +126,4 @@ if ($failures.Count -gt 0) {
     exit 1
 }
 
-Write-Output "Validated $($requiredRoutes.Count) required routes and local references in $($htmlFiles.Count) HTML files."
+Write-Output "Validated $($requiredRoutes.Count) required routes, $($forbiddenRoutes.Count) forbidden routes, $($requiredAssets.Count) assets, metadata, and local references in $($htmlFiles.Count) HTML files."

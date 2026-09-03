@@ -1,0 +1,102 @@
+name: Portfolio visual QA
+
+on:
+  push:
+    branches:
+      - portfolio-rebrand-foundation
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-visual-qa:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    env:
+      JEKYLL_ENV: production
+      PAGES_REPO_NWO: xxReina-28/xxReina-28.github.io
+
+    steps:
+      - name: Check out portfolio source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up repository Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Validate publishable source
+        shell: powershell
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-site.ps1 -SourceOnly
+
+      - name: Build production Jekyll site
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          $env:JEKYLL_ENV = "production"
+          $buildLog = Join-Path $env:RUNNER_TEMP "jekyll-build.log"
+          $qaConfig = Join-Path $env:RUNNER_TEMP "portfolio-visual-qa-config.yml"
+          Set-Content -LiteralPath $qaConfig -Value 'baseurl: ""' -Encoding utf8
+          $configPaths = "_config.yml,$qaConfig"
+          $ErrorActionPreference = "Continue"
+          bundle exec jekyll build --trace --config $configPaths 2>&1 | Tee-Object -FilePath $buildLog
+          $buildExitCode = $LASTEXITCODE
+          $ErrorActionPreference = "Stop"
+          if ($buildExitCode -ne 0) {
+            $annotation = (Get-Content -LiteralPath $buildLog -Raw) `
+              -replace '%', '%25' `
+              -replace "`r", '%0D' `
+              -replace "`n", '%0A'
+            Write-Output "::error title=Production Jekyll build failed::$annotation"
+            exit $buildExitCode
+          }
+
+      - name: Validate generated routes and assets
+        shell: powershell
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-site.ps1
+
+      - name: Set up Node.js for browser QA
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Install pinned Playwright browser runtime
+        shell: powershell
+        run: |
+          npm.cmd install --no-save --no-package-lock playwright@1.60.0
+          npx.cmd playwright install chromium
+
+      - name: Run Chromium route and visual QA
+        shell: powershell
+        run: node .\scripts\portfolio-visual-qa.mjs
+
+      - name: Upload rendered site
+        if: ${{ always() && hashFiles('_site/**') != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: portfolio-rendered-site
+          path: _site
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Upload screenshots and QA report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: portfolio-visual-qa-screenshots
+          path: |
+            ${{ runner.temp }}\portfolio-visual-qa\screenshots
+            ${{ runner.temp }}\portfolio-visual-qa\portfolio-visual-qa-report.json
+            ${{ runner.temp }}\portfolio-visual-qa\portfolio-visual-qa-report.md
+            ${{ runner.temp }}\jekyll-build.log
+          retention-days: 7
+          if-no-files-found: warn

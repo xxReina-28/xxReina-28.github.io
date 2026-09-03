@@ -1,0 +1,31 @@
+{
+  "name": "nina-suico-portfolio-astro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/run-astro.mjs dev",
+    "check": "node scripts/run-astro.mjs check",
+    "build": "npm run validate:source && npm run check && node scripts/run-astro.mjs build && npm run validate:output",
+    "preview": "node scripts/run-astro.mjs preview",
+    "validate": "npm run validate:source && npm run validate:output",
+    "validate:source": "node scripts/validate-source.mjs",
+    "validate:output": "node scripts/validate-output.mjs",
+    "qa": "node scripts/visual-qa.mjs"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.0",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.2.10",
+    "yaml": "2.8.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "24.13.3",
+    "playwright": "1.62.1",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=24.0.0 <25"
+  }
+}

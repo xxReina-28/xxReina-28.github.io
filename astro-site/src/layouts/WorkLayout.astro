@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import EvidenceDisclosure from '../components/EvidenceDisclosure.astro';
+import { capabilities } from '../data';
+type Work = CollectionEntry<'caseStudies'> | CollectionEntry<'projects'>;
+interface Props { item: Work }
+const { item } = Astro.props;
+const data = item.data;
+const kindLabel = data.work_kind.split('-').map((word) => word[0]?.toUpperCase() + word.slice(1)).join(' ');
+---
+<BaseLayout title={data.title} description={data.summary}><article class="section work-detail"><header class="page-intro work-intro"><p class="eyebrow">{kindLabel}</p><h1>{data.title}</h1>{data.date_label && <p class="muted">{data.date_label}</p>}<p class="lead">{data.summary}</p></header><div class="work-detail-grid"><div class="work-narrative">{data.tools.length > 0 && <section class="work-tools" aria-labelledby="tools-heading"><h2 id="tools-heading">Tools and methods</h2><ul class="badges">{data.tools.map((tool) => <li class="badge">{tool}</li>)}</ul></section>}<slot/><section aria-labelledby="related-capabilities-heading"><h2 id="related-capabilities-heading">Related capabilities</h2><ul class="badges">{data.capability_ids.map((id) => <li class="badge">{capabilities.find((capability) => capability.id === id)?.title}</li>)}</ul></section><div class="btn-row">{data.artifact_url && <a class="btn" href={data.artifact_url} target="_blank" rel="noopener">{data.artifact_label}</a>}{data.repository_url && <a class="btn" href={data.repository_url} target="_blank" rel="noopener">View external repository</a>}<a class="btn btn-ghost" href="/work/">Back to work</a></div></div><EvidenceDisclosure disclosure={data.disclosure} workKind={data.work_kind} evidenceStatus={data.evidence_status} implementationStatus={data.implementation_status} dataClassification={data.data_classification} outcomeStatus={data.outcome_status}/></div></article></BaseLayout>

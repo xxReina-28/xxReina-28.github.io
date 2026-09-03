@@ -1,0 +1,60 @@
+---
+layout: default
+---
+{% assign kind_label = page.work_kind | replace: '-', ' ' | capitalize %}
+<article class="section work-detail">
+  <header class="page-intro work-intro">
+    <p class="eyebrow">{{ kind_label }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.date_label %}<p class="muted">{{ page.date_label }}</p>{% endif %}
+    {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+  </header>
+
+  <div class="work-detail-grid">
+    <div class="work-narrative">
+      {% if page.tools and page.tools.size > 0 %}
+        <section class="work-tools" aria-labelledby="tools-heading">
+          <h2 id="tools-heading">Tools and methods</h2>
+          <ul class="badges" aria-label="Tools and methods">
+            {% for tool in page.tools %}<li class="badge">{{ tool }}</li>{% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+      {{ content }}
+
+      {% if page.capability_ids and page.capability_ids.size > 0 %}
+        <section aria-labelledby="related-capabilities-heading">
+          <h2 id="related-capabilities-heading">Related capabilities</h2>
+          <ul class="badges">
+            {% for capability_id in page.capability_ids %}
+              {% assign capability = site.data.capabilities | where: 'id', capability_id | first %}
+              {% if capability %}<li class="badge">{{ capability.title }}</li>{% endif %}
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+      {% if page.artifact_url or page.repository_url %}
+        <div class="btn-row">
+          {% if page.artifact_url %}<a class="btn" href="{{ page.artifact_url | relative_url }}" target="_blank" rel="noopener">{{ page.artifact_label }}</a>{% endif %}
+          {% if page.repository_url %}<a class="btn" href="{{ page.repository_url }}" target="_blank" rel="noopener">View repository</a>{% endif %}
+          <a class="btn btn-ghost" href="{{ '/work/' | relative_url }}">Back to work</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <aside class="disclosure-panel glass-surface" aria-label="Project evidence and implementation disclosure">
+      <p class="eyebrow">Evidence record</p>
+      <h2>Project disclosure</h2>
+      <p>{{ page.disclosure }}</p>
+      <dl class="status-list">
+        <div><dt>Classification</dt><dd>{{ kind_label }}</dd></div>
+        <div><dt>Evidence</dt><dd>{{ page.evidence_status | replace: '-', ' ' }}</dd></div>
+        <div><dt>Implementation</dt><dd>{{ page.implementation_status | replace: '-', ' ' }}</dd></div>
+        <div><dt>Data</dt><dd>{{ page.data_classification | replace: '-', ' ' }}</dd></div>
+        <div><dt>Outcomes</dt><dd>{{ page.outcome_status | replace: '-', ' ' }}</dd></div>
+      </dl>
+    </aside>
+  </div>
+</article>
