@@ -19,7 +19,6 @@ jobs:
     timeout-minutes: 40
     env:
       JEKYLL_ENV: production
-      QA_OUTPUT_DIR: ${{ runner.temp }}\portfolio-visual-qa
 
     steps:
       - name: Check out portfolio source

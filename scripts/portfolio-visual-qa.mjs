@@ -4,7 +4,9 @@ import { promises as fs } from "node:fs";
 import { chromium } from "playwright";
 
 const siteRoot = path.resolve(process.env.QA_SITE_DIR || "_site");
-const outputRoot = path.resolve(process.env.QA_OUTPUT_DIR || path.join(".qa-output", "portfolio-visual-qa"));
+const outputRoot = path.resolve(
+  process.env.QA_OUTPUT_DIR || path.join(process.env.RUNNER_TEMP || ".qa-output", "portfolio-visual-qa"),
+);
 const screenshotRoot = path.join(outputRoot, "screenshots");
 
 const routes = [
