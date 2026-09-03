@@ -19,6 +19,7 @@ jobs:
     timeout-minutes: 40
     env:
       JEKYLL_ENV: production
+      PAGES_REPO_NWO: xxReina-28/xxReina-28.github.io
 
     steps:
       - name: Check out portfolio source
