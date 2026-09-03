@@ -38,7 +38,7 @@ const screenshotPlan = new Map([
   ["/work/", new Map([[1440, "work-1440.png"], [390, "work-390.png"]])],
   ["/about/", new Map([[1440, "about-1440.png"], [390, "about-390.png"]])],
   ["/contact/", new Map([[1440, "contact-1440.png"], [390, "contact-390.png"]])],
-  ["/work/business-operations-diagnostic-process-redesign/", new Map([[1440, "case-business-operations-1440.png"], [390, "case-business-operations-390.png"]])],
+  ["/work/business-operations-diagnostic-process-redesign/", new Map([[1440, "case-study-1440.png"], [390, "case-study-390.png"]])],
 ]);
 
 const requiredAssets = [

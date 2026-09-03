@@ -92,7 +92,7 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v7
         with:
-          name: portfolio-visual-qa-evidence
+          name: portfolio-visual-qa-screenshots
           path: |
             ${{ runner.temp }}\portfolio-visual-qa\screenshots
             ${{ runner.temp }}\portfolio-visual-qa\portfolio-visual-qa-report.json
