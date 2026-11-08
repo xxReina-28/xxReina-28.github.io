@@ -1,0 +1,4 @@
+/* Five-item navigation for the added cybersecurity section */
+@media (max-width: 720px) {
+  .site-nav__list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
