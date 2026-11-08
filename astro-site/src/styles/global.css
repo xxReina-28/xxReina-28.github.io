@@ -185,3 +185,17 @@ p, ul, ol, dl { margin-top: 0; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 @supports not (background: color-mix(in srgb, white, black)) { .glass-surface { background: var(--surface-solid); } }
+
+
+/* Cybersecurity portfolio */
+.cyber-hero { max-width: 900px; }
+.cyber-card { border-top: 3px solid var(--cyber-accent); }
+.cyber-card--blue { --cyber-accent: var(--periwinkle); }
+.cyber-card--aqua { --cyber-accent: var(--aqua); }
+.cyber-card--violet { --cyber-accent: var(--lavender); }
+.cyber-credential { align-items: flex-start; }
+.cyber-credential .credential-copy { display: block; min-width: 0; }
+.cyber-credential .credential-copy h3 { margin-bottom: .35rem; }
+.cyber-credential .credential-copy p { margin-bottom: .65rem; }
+.cyber-repo { display: flex; min-width: 0; flex-direction: column; }
+.cyber-repo .text-link { margin-top: auto; padding-top: 1rem; }
