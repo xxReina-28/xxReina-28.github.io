@@ -430,3 +430,8 @@ details summary::-webkit-details-marker { display: none; }
   }
   .card:hover, .btn:hover { transform: none; }
 }
+
+/* Cybersecurity navigation: five items on compact screens. */
+@media (max-width: 720px) {
+  .site-nav__list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
